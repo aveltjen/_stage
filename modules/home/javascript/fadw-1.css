@@ -1,0 +1,56 @@
+#faw {
+	background: transparent;
+	text-align: center;
+	font-family: Arial,sans-serif;
+	width: 340px;
+	height: 265px;
+	position: absolute;
+	margin: 0 auto;
+	top: 100px;
+	display: none;
+	opacity: 0;
+	KHTMLOpacity: 0;
+	filter: alpha(opacity=0); 
+	-moz-opacity: 0;
+	z-index: 1000;	
+}
+
+#faw a {
+	text-decoration: none;
+	border: none;
+}
+
+#faw .ad {
+	height: 245px;
+}
+
+#faw img {
+	border: none;
+}
+
+#faw .bar {
+	background: url('bar.gif') no-repeat top left;
+	height: 20px;
+	line-height: 20px;
+}
+
+#faw .bar a {
+	margin-left: 10px;
+	font-weight: bold;
+	float: left;
+	color: #FFF;
+	font-size: 10px;
+}
+
+#faw .bar .close {
+	margin-right: 5px;
+	display: block;
+	width: 12px;
+	height: 20px;
+	float: right;
+	background: url('close_off.gif') no-repeat center;
+}
+
+#faw.show {
+	display: block;
+}

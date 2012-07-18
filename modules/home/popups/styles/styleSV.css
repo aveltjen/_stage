@@ -1,0 +1,739 @@
+/* CSS Document */
+/*frame*/
+#frame {
+	margin-top:8px;
+}
+
+/*frame*/
+.tableframe {
+	border: 1px solid #EFEFEF;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+
+/*headermenu*/
+#header {
+	height: 0px;
+}
+
+.tekstnormal a:link, .tekstnormal a:visited {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	color: #4B4B4B;
+	text-decoration: none;
+}
+
+.tekstnormal a:hover, .tekstnormal a:active { 
+	text-decoration: underline; 
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	color: #4B4B4B;
+	}
+
+/*configuratie*/
+#configuratieLNK {
+	position:relative;
+	margin-left:8px;
+	
+}/*werfmenu*/
+#werfmenuLNK {
+	position:relative;
+	margin-left:0px;
+}
+
+/*opmaak tabellen*/
+.drukrows {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-weight: normal; 
+	font-size: 10px;
+	font-style: normal;
+	color: #4B4B4B;
+	text-decoration: none;
+	background-color: #fff0e5;
+}
+#vorderlistkop {
+	position:relative;
+	margin-left:0px;
+	height:21px;
+	width:640px;
+	z-index:1;
+}
+
+#vorderlist {
+	position:relative;
+	margin-left:0px;
+	overflow-x:hidden;
+	overflow-y: auto;
+	height:200px;
+	width:640px;
+	z-index:1;
+
+}
+
+/*mijn profiel*/
+#profileLNK {
+	position:relative;
+	margin-left:8px;
+	font-weight: normal; 
+	font-family:Verdana, Helvetica, sans-serif;
+	text-decoration: none; 
+	color: #000000;
+	font-size:11px;
+}
+
+/*mijn documenten*/
+#documents {
+	position:relative;
+	margin-left:8px;
+	overflow-x:hidden;
+	overflow-y: auto;
+	height:100px;
+	width:190px;
+
+}
+
+
+
+/*documentenbeheer*/
+#documentsbeheer {
+	position:relative;
+	overflow-x:hidden;
+	overflow-y: auto;
+	height:130px;
+	width:190px;
+}
+
+/*basic CSS*/
+body {
+	margin:0;
+	background-color: #f7f6f6;
+}
+.menu a:link, a:hover, a:active, a:visited {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	color: #4B4B4B;
+	text-decoration: none;
+}
+
+a:link { 
+	font-weight: bold; 
+	font-family:Verdana, Helvetica, sans-serif;
+	text-decoration: none; 
+	color: #0070b9;
+	font-size:11px;
+	border: 0px;
+	
+	}
+a img {
+	border: none;
+	margin-bottom:0px;
+	bottom:0px;
+	margin:0px
+}
+a:visited { 
+	font-weight: bold; 
+	text-decoration: none; 
+	font-family:Verdana, Helvetica, sans-serif;
+	color: #0070b9;
+	font-size:11px;
+	border: 0px;
+	}
+a:hover, a:active { 
+	text-decoration: underline; 
+	font-family:Verdana, Helvetica, sans-serif;
+	color: #0070b9;
+	font-size:11px;
+	border: 0px;
+	
+	}
+.introtitel {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+}	
+.titel {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+}	
+.tekstnormal {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	color: #4B4B4B;
+	text-decoration: none;
+}
+
+.tekstlegend {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+}
+
+.plattetekst {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	color: #4B4B4B;
+	text-decoration: none;
+}
+.tekstkader {
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: bold;
+	color: #c00039;
+	text-decoration: none;
+}
+.tekstsmall {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+}		
+.tekstH2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight:bold;
+	color: #000000;
+	text-decoration: none;
+}	
+
+.tekstsmallbold {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	color: #000000;
+	text-decoration: none;
+	font-weight: bolder;
+}
+
+
+/*Start:index.php*/
+#header {
+	position:relative;
+	margin:0;
+	width:100%;
+	height:130px;
+	background: url(afbeeldingen/header.jpg) no-repeat ; 
+}
+
+#logo {
+	Position:absolute;
+	top:31px;
+	right:40px;
+	z-index:1;
+}
+
+#primenu {
+	position:absolute;
+	height:20px;
+	top:108px;
+	left:20px;
+	float:left;
+}
+#primenu a:link, a:visited {
+	margin-right: 20px; 
+}
+#content {
+	position:relative;
+	width:500px;
+	top:30px;
+	left:10px;
+	right:0;
+	border-right: 1px dashed black;
+	float:left;
+}
+
+#config {
+	position:relative;
+	width:235px;
+	height:38px;
+
+	}
+#icoon {
+	position:relative;
+	float:left
+	
+}
+
+#icoonlnk {
+	position:relative;
+	float:left;
+	left:5px;
+	top:0;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+#icoonlnk a:link{ 
+	font-weight: bold; 
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration: none; 
+	color: #000000;
+	font-size:13px;
+	}
+	
+#icoonlnk a:visited{ 
+	font-weight: bold; 
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration: none; 
+	color: #000000;
+	font-size:13px;
+	}
+	
+#icoonlnk a:hover{ 
+	font-weight: bold; 
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration: underline; 
+	color: #000000;
+	font-size:13px;
+	}
+#werven {
+	position:relative;
+	width:490px;
+	height:110px;
+	background: url(afbeeldingen/box.gif) no-repeat ;
+	margin-top:20px;
+	padding: 3px;
+}
+
+/*Config:index.php*/
+#contentconfig {
+	position:relative;
+	float:left;
+	width:400px;
+	top:30px;
+	margin-left:20px;
+}
+
+/*Hoofdmenu:index.php*/
+#werf {
+	Position:absolute;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color: #FFFFFF;
+	top:10px;
+	left:10px;
+	z-index:1;
+}
+
+#contenthoofdmenu {
+	position:relative;
+	background: url(afbeeldingen/hoofdmenu.jpg) no-repeat ;
+	width:700px;
+	height:600px;
+	top:30px;
+	left:100px;
+	right:0;
+	float:left;
+}
+#menuknop {
+	position:relative;
+	float:left;
+	width:300px;
+	margin-top:30px;
+}
+#contenthoofdmenuL {
+	position:relative;
+	width:330px;
+	height:500px;
+	top:10px;
+	left:50px;
+	right:0;
+	float:left;
+}
+#contenthoofdmenuR {
+	position:relative;
+	width:330px;
+	top:10px;
+	left:50px;
+	right:0;
+	float:left;
+}
+
+/*Vorderingsstaten:index.php*/
+#contentvord {
+	position:relative;
+	background: url(afbeeldingen/vorderingstaat.jpg) no-repeat ;
+	width:700px;
+	height:600px;
+	top:30px;
+	left:100px;
+	right:0;
+	float:left;
+
+}
+
+#contentvordL {
+	position:relative;
+	width:330px;
+	top:10px;
+	left:40px;
+	right:0;
+	float:left;
+
+}
+#contentvordR {
+	position:relative;
+	width:330px;
+	top:10px;
+	left:40px;
+	right:0;
+	float:left;
+
+}
+
+/*Posten:index.php*/
+#contentpost {
+	position:relative;
+	height:400px;
+	width:90%;
+}
+
+#zoekpost {
+	position:relative;
+	width:920px;
+	margin-left:10px;
+	margin-top:20px;
+	height:30px;
+	border-bottom: 1px dashed black;
+}
+#postboek {
+	position:relative;
+	margin-left:10px;
+	margin-top:20px;
+	width:920px;
+}
+#posten {
+	position:relative;
+	margin-left:10px;
+	height:300px;
+	width:970px;
+	overflow:scroll;
+}
+
+/*Posten:openen_post.php*/
+#posten a:link{ 
+	font-weight: bold; 
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration: none; 
+	color: #000000;
+	margin:0;
+	font-size:10px;
+	}
+	
+#posten a:visited{ 
+	font-weight: bold; 
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration: none; 
+	color: #000000;
+	margin:0;
+	font-size:10px;
+	}
+	
+#posten a:hover{ 
+	font-weight: bold; 
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration: underline; 
+	color: #000000;
+	margin:0;
+	font-size:10px;
+	}
+#postenform {
+	position:relative;
+	margin-top:10px;
+	margin-left:10px;
+	height:30px;
+	width:920px;
+	border-bottom: 1px dashed black;
+}
+#posteninfo {
+	position:relative;
+	margin-top:10px;
+	margin-left:10px;
+	height:30px;
+	width:920px;
+	background: url(afbeeldingen/postinfo.jpg) no-repeat ;
+	padding:2px;
+}
+
+#contentposten {
+	position:relative;
+	margin-left:10px;
+	height:400px;
+	width:920px;
+	border-top: 1px dashed black;
+	padding-top: 10px;
+}
+/*Posten:toevoegen_post.php*/
+#contentbevestigen {
+	position:relative;
+	width:500px;
+	top:30px;
+	left:10px;
+	right:0;
+	float:left;
+}
+/*Posten:aanpassen_post.php*/
+#contentaanpassen {
+	position:relative;
+	width:300px;
+	top:30px;
+	left:10px;
+	right:0;
+	border-right: 1px dashed black;
+	float:left;
+	padding-left: 2px;
+	}
+	
+#contentaanpassen a:link{ 
+	font-weight: bold; 
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration: none; 
+	color: #000000;
+	margin:0;
+	font-size:12px;
+	}
+	
+#contentaanpassen a:visited{ 
+	font-weight: bold; 
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration: none; 
+	color: #000000;
+	margin:0;
+	font-size:12px;
+	}
+	
+#contentaanpassen a:hover{ 
+	font-weight: bold; 
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration: underline; 
+	color: #000000;
+	margin:0;
+	font-size:12px;
+	}
+	
+/*Maandoverzicht:jaar1.php*/
+#contentmaandoverzicht {
+	position:relative;
+	width:140px;
+	top:30px;
+	left:10px;
+	right:0;
+	border-right: 1px dashed black;
+	float:left;
+	padding-left: 2px;
+	}	
+	
+/*Maandoverzicht:openen_maand.php*/
+#contentoverzicht {
+	position:relative;
+	width:650px;
+	height:400px;
+	top:30px;
+	left:20px;
+	right:0;
+	float:left;
+	overflow:scroll;
+	}	
+	
+/*totaaloverzicht:index.php*/
+#actieoverzichttotaal {
+	position:relative;
+	width:920px;
+	float:left;	
+	left:10px;
+	top:20px;
+	border-top:1px dashed black;
+	padding-top:15px; 
+
+}
+
+#selectiescontent {
+	position:relative;
+	width:100%;
+	height:400px;
+	float:left;	
+	overflow:scroll;
+	}
+	
+
+#selecties {
+	position:relative;
+	width:100%;
+	height:400px;
+	float:left;	
+	left:10px;
+	top:20px;
+	margin-bottom:50px;
+
+}
+
+#links {
+	position:relative;
+	width:700px;
+	height:100%;
+	float:left;	
+	left:10px;
+	top:0px;
+	margin-bottom:50px;
+
+	
+}
+#rechts {
+	position:relative;
+	width:250px;
+	float:left;	
+	left:10px;
+	top:0px;
+	margin-bottom:50px;
+	overflow:scroll;
+	
+}
+
+
+/* tabellen css*/
+
+.kleurN{ 
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight:normal;
+	color: #000000;
+	text-decoration: none;
+	background-color:#EFEFEF;
+}
+
+.kleur-over {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight:normal;
+	color: #000000;
+	text-decoration: none;
+	background-color:#e0e0e0;
+}
+
+/*OPMETINGEN:index.php*/
+
+#contentopm {
+	position:relative;
+	background: url(afbeeldingen/opmetingen.jpg) no-repeat ;
+	width:700px;
+	height:600px;
+	top:30px;
+	left:100px;
+	right:0;
+	float:left;
+
+}
+
+/*OPMETINGEN/TOOLS:index.php*/
+
+#contenttools {
+	position:relative;
+	background: url(afbeeldingen/tools.jpg) no-repeat ;
+	width:700px;
+	height:600px;
+	top:30px;
+	left:100px;
+	right:0;
+	float:left;
+
+}
+
+/*PROEVEN:index.php*/
+
+#contentproef {
+	position:relative;
+	background: url(afbeeldingen/proeven_bg.jpg) no-repeat ;
+	width:700px;
+	height:600px;
+	top:30px;
+	left:100px;
+	right:0;
+	float:left;
+
+}
+
+/*PROEVEN/WATERPROEVEN:index.php*/
+
+#contentwaterproef {
+	position:relative;
+	background: url(afbeeldingen/waterproeven_bg.jpg) no-repeat ;
+	width:700px;
+	height:600px;
+	top:30px;
+	left:100px;
+	right:0;
+	float:left;
+
+}
+
+/*PROEVEN/SLAGSONDES/0/:index.php*/
+
+#contentslagsondes {
+	position:relative;
+	background: url(afbeeldingen/slagsondes_bg.jpg) no-repeat ;
+	width:700px;
+	height:600px;
+	top:30px;
+	left:100px;
+	right:0;
+	float:left;
+
+}
+
+/*PROEVEN/DIKTEMETING/:index.php*/
+
+#contentdiktemeting {
+	position:relative;
+	background: url(afbeeldingen/diktemeting_bg.jpg) no-repeat ;
+	width:700px;
+	height:600px;
+	top:30px;
+	left:100px;
+	right:0;
+	float:left;
+
+}
+
+/*AANSLUITINGEN/:index.php*/
+
+#contentaansluitingen {
+	position:relative;
+	background: url(afbeeldingen/aansluiting_bg.jpg) no-repeat ;
+	width:700px;
+	height:600px;
+	top:30px;
+	left:100px;
+	right:0;
+	float:left;
+
+}
+
+/*CSS MEETSTAAT*/
+.rowtitel{
+background-color: #CCCCCC;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+font-weight:bold;
+color: #000000;
+text-decoration: none;
+}
+
+.rowpost{
+background-color: #EFEFEF;
+
+}

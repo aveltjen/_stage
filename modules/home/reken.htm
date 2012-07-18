@@ -1,0 +1,143 @@
+<html>
+<head>
+<TITLE>Calculator</TITLE>
+<META name="description" content="JavaScript Calculator">
+<link href="../../supervisor.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><style type="text/css">
+<!--
+body {
+	background-color: #F3F3F3;
+}
+-->
+</style></HEAD>
+
+<script><!-- Comment to hide from old browsers
+var remember = ""
+
+function compute(obj)
+{   obj.expr.value = eval(obj.expr.value)
+	//alert("De uitgevoerde bewerking :" + remember + " \nResultaat is :" + eval(obj.expr.value))
+	returnAnswer(remember, eval(obj.expr.value))
+	remember = ""
+}
+var one = '1'
+ var two = '2'
+ var three = '3'
+ var four = '4'
+ var five = '5'
+ var six = '6'
+ var seven = '7'
+ var eight = '8'
+ var nine = '9'
+ var zero = '0'
+ var plus = '+'
+ var minus = '-'
+ var multiply = '*'
+ var divide = '/'
+ var decimal = '.'
+ function enter(obj, string)
+{   
+	obj.expr.value += string
+	remember += string
+}
+function clear(obj)
+{   
+	obj.expr.value = ''
+	remember = ""
+}
+function manualInput(obj){
+	remember = obj.expr.value
+}
+
+function returnAnswer(bewerking, resultaat)
+{
+            window.getElementById('txtOpmeting_berekening').value = bewerking
+			window.opener.parent.document.getElementById('txtOpmeting_resultaat').value = resultaat
+            alert("value posted")
+            window.close()
+}
+<!--stop hiding from browers--></script>
+<head><BODY>
+<form name="calc">
+  <div align="left">
+    <table width="190" border=0 cellspacing="1">
+    <tr bgcolor="#CCCCCC"><td colspan=4 align="center">
+    <input type="text" name="expr" size=25 action="compute(this.form)" onKeyUp="javascript:manualInput(this.form)"> 
+    <tr bgcolor="#DDDDDD"><td width="41">
+      <div align="left">
+        <input type="button" value="   7   " onClick="enter(this.form, seven)">
+        
+    </div>
+    <td width="41">
+      <div align="left">
+        <input type="button" value="   8   " onClick="enter(this.form, eight)">
+      </div>
+    <td width="42">
+      <div align="left">
+        <input type="button" value="   9   " onClick="enter(this.form, nine)">
+      </div>
+    <td width="43">
+      <div align="left">
+        <input type="button" value="    /   " onClick="enter(this.form, divide)">
+      </div>
+    <tr bgcolor="#DDDDDD"><td>
+      <div align="left">
+        <input type="button" value="   4   " onClick="enter(this.form, four)">
+      </div>
+    <td>
+      <div align="left">
+        <input type="button" value="   5   " onClick="enter(this.form, five)">
+      </div>
+    <td>
+      <div align="left">
+        <input type="button" value="   6   " onClick="enter(this.form, six)">
+      </div>
+    <td>
+      <div align="left">
+        <input type="button" value="   *   " onClick="enter(this.form, multiply)">
+      </div>
+    <tr bgcolor="#DDDDDD"><td>
+      <div align="left">
+        <input type="button" value="   1   " onClick="enter(this.form, one)">
+      </div>
+    <td>
+      <div align="left">
+        <input type="button" value="   2   " onClick="enter(this.form, two)">
+      </div>
+    <td>
+      <div align="left">
+        <input type="button" value="   3   " onClick="enter(this.form, three)">
+      </div>
+    <td>
+      <div align="left">
+        <input type="button" value="    -   " onClick="enter(this.form, minus)">
+      </div>
+    <tr bgcolor="#DDDDDD">
+	<td>
+	  <div align="left">
+	    <input type="button" value="   0   " onClick="enter(this.form, zero)">
+	    </div>
+	<td>
+	  <div align="left">
+	    <input name="button" type="button" onClick="enter(this.form, decimal)" value="    .   ">	
+	      </div>
+	<td>
+	  <div align="left">
+	    <input name="button2" type="button" onClick="clear(this.form)" value="   C  ">    
+	        </div>
+	<td>
+	  <div align="left">
+	    <input type="button" value="   +   " onClick="enter(this.form, plus)">
+      </div>
+	<tr><td colspan=3 bgcolor="#DDDDDD">
+	  <div align="left">
+	    <input type="button" value="                =               " onClick="compute(this.form)">
+      </div>
+	<td>    
+      <div align="left"></div>
+	</table>
+  </div>
+</form>
+</center>
+</body>
+</html>

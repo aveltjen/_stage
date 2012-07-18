@@ -1,0 +1,79 @@
+/* ######### CSS for Shade Tabs. Remove if not using ######### */
+body {
+	margin:0;
+	background-color: #f7f6f6;
+}
+a:link { 
+	font-weight: bold; 
+	font-family:Arial, Helvetica, sans-serif;
+	text-decoration: none; 
+	color: #000000;
+	font-size:11px;
+	border: 0px;
+	
+	}
+a img {
+	border: none;
+	margin-bottom:0px;
+	bottom:0px;
+	margin:0px
+}
+a:visited { 
+	font-weight: bold; 
+	text-decoration: none; 
+	font-family:Arial, Helvetica, sans-serif;
+	color: #000000;
+	font-size:11px;
+	border: 0px;
+	}
+a:hover, a:active { 
+	text-decoration: underline; 
+	font-family:Arial, Helvetica, sans-serif;
+	color: #000000;
+	font-size:11px;
+	border: 0px;
+	
+	}
+
+/*TABBLADEN*/
+.shadetabs{
+padding: 3px 0;
+margin-left: 0;
+margin-top: 1px;
+margin-bottom: 0;
+font: bold 12px Verdana;
+list-style-type: none;
+text-align: left; /*set to left, center, or right to align the menu as desired*/
+}
+
+.shadetabs li{
+display: inline;
+margin: 0;
+}
+
+.shadetabs li a{
+	float: left;
+		background: url("tab_bg.gif") no-repeat left top;
+		margin: 0;
+		margin-left: 0px;
+		margin-right: 2px;
+		padding: 0 0 0 10px;
+		line-height: 18px;
+}
+
+.shadetabs li a span{
+	float: left;
+		display: block;
+		background: url("tab_end.gif") no-repeat right top;
+		padding: 0px 10px 0px 0px;
+}
+
+.shadetabs li a.selected{ /*selected main tab style */
+	background: url("tab_sel_bg.gif") no-repeat left top;
+	margin-right: 2px;
+}
+
+.shadetabs li a.selected span{ /*selected main tab style */
+background: url("tab_sel_end.gif") no-repeat right top;
+}
+

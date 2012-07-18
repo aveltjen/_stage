@@ -1,0 +1,102 @@
+%PDF-1.6
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/Resources 2 0 R
+/Contents 4 0 R>>
+endobj
+4 0 obj
+<</Filter /FlateDecode /Length 175>>
+stream
+xœ…M
+Â0…÷=Å[*HLjKëVĞE‚˜„vZ+öÇ4‰g®§0TDAĞÍğfŞÌû&Dp'¸‰åN@pÆ9d‰­„—ÕÓ
+Šoë
+>©Ïª+ø1‘ Y§Œ§f’ƒ‚)§¹®{ƒÕòìãpø…ÿËˆıf41önÔ…jlKp¾±ÚSVµëì€»Ñä'j‹‘èm=@•eŸFÂû¡ıe,K
+
+endstream
+endobj
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R ]
+/Count 1
+/MediaBox [0 0 595.28 841.89]
+>>
+endobj
+5 0 obj
+<</Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+6 0 obj
+<</Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 5 0 R
+/F2 6 0 R
+>>
+/XObject <<
+>>
+>>
+endobj
+7 0 obj
+<<
+/Names [(EmbeddedJS) 8 0 R ]
+>>
+endobj
+8 0 obj
+<<
+/S /JavaScript
+/JS (
+\r
+var rep = app.response\('Donnez votre nom'\);\r
+app.alert\('Vous vous appelez '+rep\);\r
+
+)
+>>
+endobj
+9 0 obj
+<<
+/Producer (FPDF 1.6)
+/CreationDate (D:20100118164253)
+>>
+endobj
+10 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /FitH null]
+/PageLayout /OneColumn
+/Names <</JavaScript 7 0 R>>
+>>
+endobj
+xref
+0 11
+0000000000 65535 f 
+0000000332 00000 n 
+0000000616 00000 n 
+0000000009 00000 n 
+0000000087 00000 n 
+0000000419 00000 n 
+0000000515 00000 n 
+0000000730 00000 n 
+0000000780 00000 n 
+0000000917 00000 n 
+0000000992 00000 n 
+trailer
+<<
+/Size 11
+/Root 10 0 R
+/Info 9 0 R
+>>
+startxref
+1125
+%%EOF
