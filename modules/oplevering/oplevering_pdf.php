@@ -1,4 +1,4 @@
-<?php session_start(); define("IN_SITE", true); define('EUR',chr(128));
+<?php session_start(); define("IN_SITE", true); define('EUR',chr(128));$root = $_SERVER['DOCUMENT_ROOT'];
 	require_once("fpdf.php");
 	require_once("myfpdf-table.php");
 	require_once("class.fpdftable.php");
@@ -157,7 +157,7 @@ while($post = $posten->fetchrow(MDB2_FETCHMODE_ASSOC)){
 		$uitgevoerd = $opmeting["uitgevoerd"];
 		
 		if($opmeting["bijlage1"] != ""){
-			$link = "<a href='http://178.208.35.157/modules/home/uploads/opmetingen".$userId."/".$opmeting["bijlage1"]."'>click to download</a>";
+			$link = "<a href='".$root."/files_dir/uploads/opmetingen".$userId."/".$opmeting["bijlage1"]."'>click to download</a>";
 		}else{
 			$link = "";
 		}

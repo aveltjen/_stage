@@ -1,6 +1,5 @@
 <?php session_start(); define("IN_SITE", true); $self=$_SERVER['PHP_SELF'];
 	//********Requirements & Includes***************
-	//test
 	require("../../PEAR/MDB2.php");
 	require_once("../../PEAR/HTMLTemplate/IT.php");
 	require("inc/users.da.inc.php");
@@ -38,7 +37,7 @@ error_reporting($ebits ^ E_NOTICE);
 	
 	
 // 	$FileManager = new FileManager("/var/www/html/users/supervisie/modules/filemanager/root/".$id."/w".$werf."");
-	$FileManager = new FileManager("".$_SERVER['DOCUMENT_ROOT']."/_stage/files_dir/root/".$werfnummer."_rootfolder");
+	$FileManager = new FileManager("".$_SERVER['DOCUMENT_ROOT']."/files_dir/root/".$werfnummer."_rootfolder");
    
 	$tpl->setVariable("filemanager",$FileManager->create());
 		

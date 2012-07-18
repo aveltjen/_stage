@@ -82,7 +82,7 @@ $tpl->setVariable("eur","".EUR."");
 					}else{
 						$uitgevoerd = $opmeting2["uitgevoerd"];
 						$berekening = wordwrap($opmeting2["berekening"], 55, "\n", true);
-						$link = "<a href='".$root."/_stage/modules/home/uploads/opmetingen".$toezichterid."/".$opmeting2["bijlage1"]."' target='blank'>download<a/>";
+						$link = "<a href='../../../files_dir/uploads/opmetingen".$toezichterid."/".$opmeting2["bijlage1"]."' target='blank'>download<a/>";
 						
 						$tpl->setVariable("berekening",$berekening);
 						$tpl->setVariable("uitgevoerd",number_format($uitgevoerd,'3',',',' '));

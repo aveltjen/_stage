@@ -1,4 +1,4 @@
-<?php session_start(); define("IN_SITE", true); $self=$_SERVER['PHP_SELF'];
+<?php session_start(); define("IN_SITE", true); $self=$_SERVER['PHP_SELF'];$root = $_SERVER['DOCUMENT_ROOT'];
 	//********Requirements & Includes***************
 	require("../../PEAR/MDB2.php");
 	require_once("../../PEAR/HTMLTemplate/IT.php");
@@ -112,10 +112,6 @@ error_reporting($ebits ^ E_NOTICE);
 		$omschrijving = $_REQUEST["omschrijving"];
 		$startdatum	= $_REQUEST["startdatum"];
 		
-		echo $nummer;
-		echo $omschrijving;
-		echo $startdatum;
-		echo $id;
 		
 		//** DOCUMENT UPLOADEN
 		
@@ -126,7 +122,7 @@ error_reporting($ebits ^ E_NOTICE);
 		
 			if ($file->isValid()) {
 				$file->setName("uniq");
-				$moved = $file->moveTo("uploads/meetstaten/");
+				$moved = $file->moveTo("".$root."/files_dir/uploads/meetstaten/");
 			    if (!PEAR::isError($moved)) {
 			    	$meetstaat = $file->getProp("name");
 			    	

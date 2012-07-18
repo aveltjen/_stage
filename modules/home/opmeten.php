@@ -1,4 +1,4 @@
-<?php session_start(); define("IN_SITE", true); $self=$_SERVER['PHP_SELF'];
+<?php session_start(); define("IN_SITE", true); $self=$_SERVER['PHP_SELF'];$root = $_SERVER['DOCUMENT_ROOT'];
 	//********Requirements & Includes***************
 	require("../../PEAR/MDB2.php");
 	require_once "../../PEAR/HTTP/Upload.php";
@@ -109,7 +109,7 @@ error_reporting($ebits ^ E_NOTICE);
 		");
 		
 	}
-	
+
 	if($_REQUEST["wijzig"]== "yes"){
 		
 		$vid 				= $_REQUEST["vid"];
@@ -128,9 +128,9 @@ error_reporting($ebits ^ E_NOTICE);
 				 $file->setName("uniq");
 				 $bijlage_new = $file->getProp("name");
 				 
-			    $moved = $file->moveTo("uploads/opmetingen".$id."");
+			    $moved = $file->moveTo("".$root."/files_dir/uploads/opmetingen".$id."/");
 			    if (!PEAR::isError($moved)) {
-			    	unlink("uploads/opmetingen".$id."/".$bijlage_old."");
+			    	unlink("".$root."/files_dir/uploads/opmetingen".$id."/".$bijlage_old."");
 			    	UpdateOpmeting($vid,$datum_new,$omschrijving_new,$uitgevoerd_new,$bijlage_new,$werf);
 			    	
 			    } else {
@@ -139,7 +139,7 @@ error_reporting($ebits ^ E_NOTICE);
 			} elseif ($file->isMissing()) {
 	
 					if ($attach == "none"){
-						unlink("uploads/opmetingen".$id."/".$bijlage_old."");
+						unlink("".$root."/files_dir/uploads/opmetingen".$id."/".$bijlage_old."");
 						$bijlage_old = "";
 						UpdateOpmeting($vid,$datum_new,$omschrijving_new,$uitgevoerd_new,$bijlage_old,$werf);
 					}else{
@@ -237,7 +237,7 @@ error_reporting($ebits ^ E_NOTICE);
 			if($bijlage==""){
 				
 			}else{
-				unlink("uploads/opmetingen".$id."/".$bijlage."");
+				unlink("".$root."/files_dir/uploads/opmetingen".$id."/".$bijlage."");
 			}
 		}else {
 			
@@ -267,7 +267,7 @@ error_reporting($ebits ^ E_NOTICE);
 				 $file->setName("uniq");
 				 $bijlage = $file->getProp("name");
 				 
-			    $moved = $file->moveTo("uploads/opmetingen".$id."");
+			    $moved = $file->moveTo("".$root."/files_dir/uploads/opmetingen".$id."");
 			    if (!PEAR::isError($moved)) {
 			    	addOpmeting($werf,$user,$msID,$datum,$omschrijving,$uitgevoerd,$bijlage);
 			    	
@@ -306,7 +306,7 @@ error_reporting($ebits ^ E_NOTICE);
 		if($opmeting["bijlage1"]==""){
 			$tpl->setVariable("bijlage","");
 		}else{
-			$tpl->setVariable("bijlage","<a href='uploads/opmetingen".$id."/".$opmeting["bijlage1"]."' target='_blank'><img src='images/attach.png'></a>");
+			$tpl->setVariable("bijlage","<a href='../../../files_dir/uploads/opmetingen".$id."/".$opmeting["bijlage1"]."' target='_blank'><img src='images/attach.png'></a>");
 		}
 		
 		$tpl->setVariable("berekening",wordwrap($opmeting["berekening"], 60, "\n", true));

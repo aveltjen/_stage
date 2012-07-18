@@ -1,4 +1,4 @@
-<?php session_start(); define("IN_SITE", true); $self=$_SERVER['PHP_SELF'];
+<?php session_start(); define("IN_SITE", true); $self=$_SERVER['PHP_SELF'];$root = $_SERVER['DOCUMENT_ROOT'];
 	//********Requirements & Includes***************
 	require("../../PEAR/MDB2.php");
 	require_once("../../PEAR/HTMLTemplate/IT.php");
@@ -33,10 +33,8 @@
 // 	print_r($user);
 	$id			= $user["id"];
 	$group = $user["groupid"];
-	$upload_dir	= "../../files_dir/uploads/documents".$id."/server/php/";
-	
-	
-	
+	$upload_dir	= "../../../files_dir/uploads/documents".$id."/server/php/";
+
 	//** Profiel ophalen
 	//user gegevens uit sessie halen
 		$tpl->setVariable("Name","".$user["voornaam"]." ".$user["naam"]."");
