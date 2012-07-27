@@ -37,7 +37,7 @@ error_reporting($ebits ^ E_NOTICE);
 	//** Profiel ophalen
 	$id			= $user["id"];
 	$profile 	= GetUserById($id);
-	$upload_dir	= "../../files_dir/uploads/documents".$id."/server/php/";
+	$upload_dir	= "../../../files_dir/uploads/documents".$id."/server/php/";
 	$tpl->setVariable("upload_dir",$upload_dir);
 	
 	$tpl->setVariable("Name","".$profile["voornaam"]." ".$profile["naam"]."");

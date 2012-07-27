@@ -35,20 +35,56 @@ function newWindow(mypage,myname,w,h,features) {
 			<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 			<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js" type="text/javascript"></script>
 			<script src="jquery/jquery-tooltip/js/jtip.js" type="text/javascript"></script>
+			<script src="jquery/more-show-hide.js" type="text/javascript"></script>
 <script>
 	$(function() {
-		var pickerOpts = {dateFormat:"yy-mm-dd"}; 
-				    $("#date").datepicker(pickerOpts);
-						
-	});	            
-</script>
-         
+			var pickerOpts = {dateFormat:"yy-mm-dd"}; 
+					    $("#date").datepicker(pickerOpts);
 
+		});
+		
+	
+	$(function(){        
+	      
+	        $('#mySubmitBtn').click(function() {
+		           $( "#dialog-confirm" ).dialog({
+							resizable: false,
+							height:140,
+							modal: true,
+							buttons: {
+								"Bevestigen": function() {
+									$( this ).dialog( "close" );
+									$('#addvordering').submit();
+								},
+								Annuleren: function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						});
+		        });
+	});
+	
+	$(document).ready(function(){
+
+	        $(".slidingDiv").hide();
+	        $(".show_hide").show();
+
+	    $('.show_hide').click(function(){
+	    $(".slidingDiv").slideToggle();
+	    });
+
+	});
+	   
+</script>
 
 </head>
 <body>
 {titel}
 
+
+<div id="dialog-confirm" title="Gelinkte posten gevonden!" style="display: none;">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Let op: De vordering wordt ook bij de gelinkte posten doorgevoerd.</p>
+</div>
 <table cellpadding="0" cellspacing="0" border="0" align="center">
   <tr>
     
@@ -81,6 +117,7 @@ function newWindow(mypage,myname,w,h,features) {
                             	{txt_wijzig}
                             		<fieldset>
                             			<legend class="tekstlegend"><img src="images/book-open-bookmark.png"> Gegevens geselecteerde post</legend>
+										<form id="addvordering" action="?werf={werf}&msID={msID}&action=add" method="post">
                             			<table width="650" class="tekstnormal">
                             				<tr align="left">
                             					<td width="74"><b>Nummer:</b></td>
@@ -94,13 +131,42 @@ function newWindow(mypage,myname,w,h,features) {
                            					</tr>
                            					<tr align="left">
                            						<td colspan="8"><b>Omschrijving:</b> {omschrijving}</td>
-                           					</tr>		  
+                           					</tr>
+											<tr>
+												<td colspan="8"></td>
+											</tr>
+ 											<tr>
+												<td colspan="8">
+													<table border="0" class="tip">
+														<tr>
+															<td width="150"><img src="images/create_link.gif">&nbsp;<b>postnummer(s)<span class="formInfo"><a href="jquery/jquery-tooltip/linken2.htm?width=280" class="jTip" id="two" name="Gelinkte posten">?</a></span>&nbsp;:</b></td>
+														<!-- BEGIN links -->
+															{links}
+														<!-- END links -->
+															{norecords}
+														</tr>
+													
+													</table>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="8">
+													<a href="#" class="show_hide">Toon/Verberg</a> (info gelinkte posten)
+													<div class="slidingDiv">
+													<table celspacing="1">
+													<tr bgcolor="#e6e6e6"><td><b>Postnr.</b></td><td><b>Omschrijving</b></td></tr>
+													{meerinfo}
+													</table>
+													
+													</div>
+												</td>
+											</tr>
                             			</table>
                             		</fieldset><br>
                             		
                             		<fieldset>
                             		<legend class="tekstlegend"><img src="images/plus-circle-frame.png"> Nieuwe vordering ingeven</legend>
-                            		<form action="?werf={werf}&msID={msID}&action=add" method="post">
+                            		
                             		
                             		
                             		<table width="650" class="tekstnormal">
@@ -108,7 +174,7 @@ function newWindow(mypage,myname,w,h,features) {
                             			<tr align="left" class="tip">
                             				<td>Datum:</td>
                             				<td><input type="text" size="15" id="date" name="datum" value="{lastdate}"/>&nbsp;<span class="formInfo"><a href="jquery/jquery-tooltip/datum.htm?width=250" class="jTip" id="tree" name="Datum vordering invoeren">?</a></span>&nbsp;</td>
-                            				<td align="right"><a href="?lastvordering=1&msID={msID}&werf={werf}"><img src="images/calendar_add.png"></a><span class="formInfo"><a href="jquery/jquery-tooltip/history.htm?width=280" class="jTip" id="two" name="Laatste vordering oproepen">?</a></span>&nbsp;<button type="submit">opslaan</button></td>
+                            				<td align="right"><a href="?lastvordering=1&msID={msID}&werf={werf}"><img src="images/calendar_add.png"></a><span class="formInfo"><a href="jquery/jquery-tooltip/history.htm?width=280" class="jTip" id="two" name="Laatste vordering oproepen">?</a></span>&nbsp;<button id="mySubmitBtn" type="button">opslaan</button></td>
                             			</tr>
                             			<tr align="left">
                             				<td>Omschrijving:</td>
@@ -129,32 +195,36 @@ function newWindow(mypage,myname,w,h,features) {
                             		
                             		<fieldset>
                             		<legend class="tekstlegend"><img src="images/property-blue.png"> Gevorderde hoeveelheden <i>(Totaal uitgevoerd: {totaal})</i></legend>
-                            		
-                            		<table height="200">
+                            		<form id="addopmeting" action="?werf={werf}&msID={msID}&action=add" method="post">
+                            		<table height="180">
                             			<tr>
                             				<td valign="top">
                             			<div id="vorderlistkop">	
-                            			<table width="620" border="0" cellpadding="2" cellspacing="1">
+                            			<table width="645" border="0" cellpadding="2" cellspacing="1">
                             			<tr class="tekstnormal" bgcolor="#EFEFEF" align="left">
 											<td width="20"></td>
+											<td width="80"><b>ID</b></td>
 											<td width="88"><b>Datum</b></td>
-											<td width="328"><b>Omschrijving</b></td>
+											<td width="248"><b>Omschrijving</b></td>
 											<td width="88"><b>Uitgevoerd</b></td>
+											<td width="25">&nbsp;</td>
 											<td width="25">&nbsp;</td>
 											<td width="25">&nbsp;</td>
 										</tr>	
 										</table>
 										</div>
 										<div id="vorderlist">
-										<table width="620" border="0" cellpadding="2" cellspacing="1">
+										<table width="645" border="0" cellpadding="2" cellspacing="1">
                             			<!-- BEGIN vorderingen -->
                             			<tr class="drukrows" align="left">
 											<td width="20">{icon}</td>
+											<td width="80">{id}</td>
 											<td width="88">{datum}</td>
-											<td width="328">{omschrijving_vordering}</td>
+											<td width="248">{omschrijving_vordering}</td>
 											<td width="88">{uitgevoerd}</td>
 											<td width="25" align="center">{delete}</td>
 											<td width="25" align="center">{wijzig}</td>
+											<td width="25" align="center">{opmeten}</td>
 										</tr>	
                                			<!-- END vorderingen -->
                                			{geenvord}
@@ -163,7 +233,7 @@ function newWindow(mypage,myname,w,h,features) {
                             				</td>
                             			</tr>
                             		</table>
-                            		
+                            		</form>
                             		</fieldset>
                             	</td>
                             </tr>
