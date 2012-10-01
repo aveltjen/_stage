@@ -8,6 +8,7 @@
 	require("inc/vorderingen.da.inc.php");
 	require("inc/link.da.inc.php");
 	require("inc/opmetingen.da.inc.php");
+	require("inc/functions.inc.php");
 	
 
 	$ebits = ini_get('error_reporting');
@@ -154,10 +155,17 @@ error_reporting($ebits ^ E_NOTICE);
 		$timestamp = mktime(0,0,0,$date[1],$date[2],$date[0]);
 		
 		$periode_new = date("m-Y", $timestamp);
+			
+		$list = getVorderingenSameKey($vid);
+			while($row = $list->fetchrow(MDB2_FETCHMODE_ASSOC)){
+			 		$vid2 = $row["idvordering"];
+					UpdateVordering($vid2,$datum_new,$omschrijving_new,$uitgevoerd_new,$periode_new,$werf);
+			}
 		
-		UpdateVordering($vid,$datum_new,$omschrijving_new,$uitgevoerd_new,$periode_new,$werf);
+				
+				
 		
-		//UPDATE MEETSTAAT
+		//UPDATE MEETSTAAT(gelinkte posten)
 		//VORDERINGEN OPHALEN
 			
 		$vorderingen = GetVorderingenByPost($msID,$werf);
@@ -311,12 +319,19 @@ error_reporting($ebits ^ E_NOTICE);
 							UpdateGH($gh,$msID,$werf);
 			
 		}else{
-			
+			//links toevoegen
 			array_push($add, $msID);
+			
+			//unieke linkcode genereren
+			$key = generatekey(20);
 				
 				foreach ($add as $msID){
+						
+						
 						addVordering($werf,$user,$msID,$vs,$datum,$omschrijving,$uitgevoerd,$periode);
-
+						$IDvordering = mysql_insert_id();
+						addKey($werf,$IDvordering,$key);
+						
 										//UPDATE MEETSTAAT
 										//VORDERINGEN OPHALEN
 

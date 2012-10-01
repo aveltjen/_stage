@@ -19,6 +19,7 @@
 			global $db;
 			
 		$db->query("INSERT INTO v_vorderingen_werf_".$werf." (ID, IDmeetstaat, IDuser, datum, omschrijving, uitgevoerd, periode) VALUES( 'NULL', '$msID', '$user', '$datum', '$omschrijving', '$uitgevoerd', '$periode')");
+				
 		}
 		
 		//Functie om user op te halen aan de hand van zijn groep ID
@@ -146,6 +147,41 @@
 			}
 			
 		}
+		
+		//INSERT KEY LINKS
+			function addKey($werf,$IDvordering,$key){
+				global $db;
+
+				$db->query("INSERT INTO link_vordering (ID, werfID, IDvordering, sleutel) VALUES( 'NULL','$werf','$IDvordering','$key')");
+
+			}
+		
+		//GET KEY
+			function getKey($IDvordering){
+				global $db;
+
+				$result = $db->query("SELECT sleutel FROM link_vordering WHERE IDvordering = '$IDvordering'");
+			
+				return $result;
+				
+			}
+			
+		//GET VORDERINGEN SAME KEY
+			function getVorderingenSameKey($IDvordering){
+				global $db;
+
+				$qry1 = $db->query("SELECT sleutel FROM link_vordering WHERE IDvordering = '$IDvordering'");
+				$result1 = $qry1->fetchrow(MDB2_FETCHMODE_ASSOC);
+				
+				$sleutel = $result1["sleutel"];
+				
+				$qry2 = $db->query("SELECT IDvordering FROM link_vordering WHERE sleutel = '$sleutel'");
+				
+				return $qry2;
+
+				}
+		
+		
 ?>
 <?php ###########################################
 } else { echo("Hacking Attempt"); } // End     ?>
