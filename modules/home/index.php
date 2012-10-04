@@ -6,8 +6,6 @@
 	require("inc/documents.da.inc.php");
 	require("inc/werven.da.inc.php");
 
-	$ebits = ini_get('error_reporting');
-	error_reporting($ebits ^ E_NOTICE);
 	//*********Check user session***************	
 	if(!isset($_SESSION["user"])){
 		header("Location: ../../index.php");

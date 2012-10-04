@@ -91,6 +91,36 @@
 			
 			$db->query("DELETE FROM link WHERE ID = '$linkID'");
 		}
+		
+		function CheckLinkVordering($vid){
+			global $db;
+			
+			$sql = $db->query("SELECT sleutel FROM link_vordering WHERE IDvordering = '$vid'");
+			$result = $sql->fetchrow(MDB2_FETCHMODE_ASSOC);
+			
+			$num = $sql->numRows();
+			
+			if($num > 0){
+				
+				$sleutel = $result["sleutel"];
+				$sql2 = $db->query("SELECT * FROM link_vordering WHERE sleutel = '$sleutel'");
+				
+				while($row = $sql2->fetchrow(MDB2_FETCHMODE_ASSOC)){
+					$list[] = $row["idvordering"];
+				}
+			
+				return $list;
+						
+			}else{
+				return NULL;
+			}
+		}
+		
+		function DeleteLinkVordering($linkID){
+			global $db;
+			
+			$db->query("DELETE FROM link_vordering WHERE IDvordering = '$linkID'");
+		}
 			
 		
 ?>

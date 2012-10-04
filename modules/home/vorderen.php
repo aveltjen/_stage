@@ -10,9 +10,6 @@
 	require("inc/opmetingen.da.inc.php");
 	require("inc/functions.inc.php");
 	
-
-	$ebits = ini_get('error_reporting');
-error_reporting($ebits ^ E_NOTICE);
 	//*********Check user session***************	
 	if(!isset($_SESSION["user"])){
 		header("Location: ../../index.php");
@@ -210,8 +207,20 @@ error_reporting($ebits ^ E_NOTICE);
 		
 		$werf = $_REQUEST["werf"];
 		$vid = $_REQUEST["vid"];
-
-		deleteVordering($vid,$werf);
+		
+		//check vid posts
+		$list = CheckLinkVordering($vid);
+		
+		if($list != NULL){
+			foreach($list as $key){
+				deleteVordering($key,$werf);
+				DeleteLinkVordering($key);
+			}
+		}else{
+			deleteVordering($vid,$werf);
+		}
+		
+		
 		
 		//UPDATE MEETSTAAT
 		//VORDERINGEN OPHALEN

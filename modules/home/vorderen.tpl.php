@@ -139,7 +139,7 @@ function newWindow(mypage,myname,w,h,features) {
 												<td colspan="8">
 													<table border="0" class="tip">
 														<tr>
-															<td width="150"><img src="images/create_link.gif">&nbsp;<b>postnummer(s)<span class="formInfo"><a href="jquery/jquery-tooltip/linken2.htm?width=280" class="jTip" id="two" name="Gelinkte posten">?</a></span>&nbsp;:</b></td>
+															<td width="200"><img src="images/chain--arrow.png">&nbsp;<b>gelinkte postnummer(s)<span class="formInfo"><a href="jquery/jquery-tooltip/linken2.htm?width=280" class="jTip" id="two" name="Gelinkte posten">?</a></span>&nbsp;:</b></td>
 														<!-- BEGIN links -->
 															{links}
 														<!-- END links -->
