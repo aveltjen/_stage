@@ -72,7 +72,7 @@
 	$vslist = GetFullVorderingsstaatByWerf($WerfID);
 	
 	$tpl->setCurrentBlock("vslist");
-	//while($vs = $vslist->fetchrow(MDB2_FETCHMODE_ASSOC)){
+	while($vs = $vslist->fetchrow(MDB2_FETCHMODE_ASSOC)){
 
 		if($vs["nummer"] != "" AND $vs["voorziene_hv"] != ""){
 			
@@ -196,7 +196,7 @@
 		}
 		
 		$tpl->parseCurrentBlock();
-//	}
+	}
 	//********************* Template Tonen *************
 	
 	$tpl->show(); //moet ge doen, anders ziede niet
