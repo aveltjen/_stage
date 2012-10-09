@@ -4,8 +4,8 @@ require("PEAR/MDB2.php");
 require_once("PEAR/HTMLTemplate/IT.php");
 require("inc/users.da.inc.php");
 
-$ebits = ini_get('error_reporting');
-error_reporting($ebits ^ E_NOTICE);	
+// $ebits = ini_get('error_reporting');
+// error_reporting($ebits ^ E_NOTICE);	
 
 //*********Template modifications***************
 $tpl = new HTML_Template_IT("./");

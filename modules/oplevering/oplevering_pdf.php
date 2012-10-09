@@ -9,8 +9,8 @@
 	require("inc/werven.da.inc.php");
 	require("inc/users.da.inc.php");
 	
-	$ebits = ini_get('error_reporting');
-	error_reporting($ebits ^ E_NOTICE);
+	// $ebits = ini_get('error_reporting');
+	// 	error_reporting($ebits ^ E_NOTICE);
 	
 		
 	//WERF ID GETTEN
