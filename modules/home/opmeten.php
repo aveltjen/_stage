@@ -7,9 +7,8 @@
 	require("inc/werven.da.inc.php");
 	require("inc/meetstaat.da.inc.php");
 	require("inc/opmetingen.da.inc.php");
+	require("inc/vorderingen.da.inc.php");
 
-	$ebits = ini_get('error_reporting');
-error_reporting($ebits ^ E_NOTICE);
 	//*********Check user session***************	
 	if(!isset($_SESSION["user"])){
 		header("Location: ../../index.php");
@@ -242,7 +241,63 @@ error_reporting($ebits ^ E_NOTICE);
 		}else {
 			
 		}
+		
+		//DOORSTUREN NAAR VORDERING
+		if($_REQUEST["action"]== "vorder"){
 
+			$tpl->setVariable("txt_delete","
+
+
+			<table width='100%' border='0' class='tekstnormal' bgcolor='#fae3e3'>
+			<tr>
+				<td align='center' colspan='2'><img src='images/exclamation.png' > opmeting met onderstaand ID doorsturen naar vordering?<br><b>ID " .$_REQUEST["vid"]."</b></td>
+			</tr>
+			<tr>
+				<td colspan='2' align='center'>
+					<table width='150' border='0'>
+					<tr>
+						<td width='50%'><img src='images/tick-shield.png'> <a href='?msID=".$msID."&werf=".$werf."&vorder=yes&vid=".$_REQUEST["vid"]."'>Ja</a></td>
+						<td width='50%'><img src='images/cross-shield.png'> <a href='?msID=".$msID."&werf=".$werf."'>Nee</a> </td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+			<br>
+			");
+		}	
+		
+		if($_REQUEST["vorder"]== "yes"){
+
+			$werf = $_REQUEST["werf"];
+			$vid = $_REQUEST["vid"];
+			$user = $user["id"];
+
+			$row = GetOpmetingByVid($vid,$werf);
+
+			$omschrijving = $row["berekening"];
+			$uitgevoerd = $row["uitgevoerd"];
+
+			$datum = date("Y-m-d");
+						
+			$date = explode("-",$datum); 
+			$timestamp = mktime(0,0,0,$date[1],$date[2],$date[0]);
+			$periode = date("m-Y", $timestamp);
+			
+			addVordering($werf,$user,$msID,$vs,$datum,$omschrijving,$uitgevoerd,$periode);
+
+			//UPDATE MEETSTAAT
+			//VORDERINGEN OPHALEN
+
+			$vorderingen = GetVorderingenByPost($msID,$werf);
+			$gh = 0;
+				while($vordering = $vorderingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
+					$gh = $gh + $vordering["uitgevoerd"];
+				}
+
+			UpdateGH($gh,$msID,$werf);
+
+		}
 	
 	//OPMETING TOEVOEGEN
 	if($_REQUEST["action"]=="add"){
@@ -311,8 +366,10 @@ error_reporting($ebits ^ E_NOTICE);
 		
 		$tpl->setVariable("berekening",wordwrap($opmeting["berekening"], 60, "\n", true));
 		$tpl->setVariable("gemeten",$opgemeten);
+		$tpl->setVariable("ID",$opmeting["id"]);
 		$tpl->setVariable("delete","<a href='?msID=".$msID."&werf=".$werf."&action=delete&vid=".$opmeting["id"]."&bijlage=".$opmeting["bijlage1"]."'><img src='images/cross.png'></a>");
 		$tpl->setVariable("wijzig","<a href='?msID=".$msID."&werf=".$werf."&action=wijzig&vid=".$opmeting["id"]."'><img src='images/bin--pencil.png'></a>");
+		$tpl->setVariable("vorder","<a href='?msID=".$msID."&werf=".$werf."&action=vorder&vid=".$opmeting["id"]."'><img src='images/book--arrow.png'></a>");
 		
 		$totaal = $totaal + $opmeting["uitgevoerd"];
 		$tpl->setVariable("totaal",number_format($totaal,3,',',''));

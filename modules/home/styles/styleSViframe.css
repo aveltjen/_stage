@@ -95,7 +95,7 @@
 	margin-left:0px;
 	overflow-x:hidden;
 	overflow-y: scroll;
-	width:850px;
+	width:880px;
 	height: 35px;
 	z-index:1;
 	
@@ -107,7 +107,29 @@
 	overflow-x:hidden;
 	overflow-y: auto;
 	height:350px;
-	width:850px;
+	width:880px;
+	z-index:1;
+
+}
+
+#vstitels_link {
+	position:relative;
+	margin-left:0px;
+	overflow-x:hidden;
+	overflow-y: scroll;
+	width:448px;
+	height: 35px;
+	z-index:1;
+	
+
+}
+#vslist_link {
+	position:relative;
+	margin-left:0px;
+	overflow-x:hidden;
+	overflow-y: auto;
+	height:300px;
+	width:448px;
 	z-index:1;
 
 }

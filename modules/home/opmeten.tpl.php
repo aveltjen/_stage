@@ -146,11 +146,13 @@ function compute(obj) {
                             			<tr>
                             				<td valign="top">
                             			<div id="vorderlistkop">	
-                            			<table width="620" border="0" cellpadding="2" cellspacing="1">
+                            			<table width="645" border="0" cellpadding="2" cellspacing="1">
                             			<tr class="tekstnormal" bgcolor="#EFEFEF" align="left">
 											<td width="20"></td>
-											<td width="421"><b>Omschrijving/berekening</b></td>
+											<td width="80"><b>OpmetingID</b></td>
+											<td width="341"><b>Omschrijving/berekening</b></td>
 											<td width="58"><b>Gemeten</b></td>
+											<td width="25">&nbsp;</td>
 											<td width="25">&nbsp;</td>
 											<td width="25">&nbsp;</td>
 											<td width="25">&nbsp;</td>
@@ -158,15 +160,17 @@ function compute(obj) {
 										</table>
 										</div>
 										<div id="vorderlist">
-										<table width="620" border="0" cellpadding="2" cellspacing="1">
+										<table width="645" border="0" cellpadding="2" cellspacing="1">
                             			<!-- BEGIN opmetingen -->
                             			<tr class="drukrows" align="left">
 											<td width="20">{icon}</td>
-											<td width="421">{berekening}</td>
+											<td width="80">{ID}</td>
+											<td width="341">{berekening}</td>
 											<td width="58">{gemeten}</td>
 											<td width="25">{bijlage}</td>
 											<td width="25" align="center">{delete}</td>
 											<td width="25" align="center">{wijzig}</td>
+											<td width="25" align="center">{vorder}</td>
 										</tr>	
                                			<!-- END opmetingen -->
                                			{geenopm}

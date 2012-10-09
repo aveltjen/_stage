@@ -5,9 +5,11 @@
 	require("inc/users.da.inc.php");
 	require("inc/werven.da.inc.php");
 	require("inc/meetstaat.da.inc.php");
+	require("inc/link.da.inc.php");
+	
+	//$ebits = ini_get('error_reporting');
+	//error_reporting($ebits ^ E_NOTICE);
 
-	// $ebits = ini_get('error_reporting');
-	// error_reporting($ebits ^ E_NOTICE);
 	//*********Check user session***************	
 	if(!isset($_SESSION["user"])){
 		header("Location: ../../index.php");
@@ -65,14 +67,12 @@
 	$tpl->setVariable("description",$string);
 	$tpl->setVariable("id",$werf["id"]);
 	
-	
-	
-	
+
 	//** Vorderingsstaat ophalen
 	$vslist = GetFullVorderingsstaatByWerf($WerfID);
 	
 	$tpl->setCurrentBlock("vslist");
-	while($vs = $vslist->fetchrow(MDB2_FETCHMODE_ASSOC)){
+	//while($vs = $vslist->fetchrow(MDB2_FETCHMODE_ASSOC)){
 
 		if($vs["nummer"] != "" AND $vs["voorziene_hv"] != ""){
 			
@@ -110,13 +110,33 @@
 				$tpl->setVariable("eenheidsprijs",number_format($vs["prijs"],2,',',''));
 				$tpl->setVariable("historiek","<input type='checkbox' name='selecteren[]' value='".$vs["id"]."'>");
 				
+				//link grey are not
+				$data = CheckIfHasLink($vs["id"]);
+			
+				if($data == NULL){
+						$tpl->setVariable("linken","<a href='posten_linken.php?msID=".$vs["id"]."&werf=".$WerfID."'><img src='images/chain--plus.png'></a>");
+				}else{
+						$tpl->setVariable("linken","<a href='posten_linken.php?msID=".$vs["id"]."&werf=".$WerfID."'><img src='images/chain--arrow.png'></a>");
+				}
+				
+				
+			
+			
+				
+			
+				
 				if($group == "3"){
 					$tpl->setVariable("vorderen","");
 					$tpl->setVariable("opmeten","");
+					$tpl->setVariable("tooltip","");
+					$tpl->setVariable("linken","");
 				}else{
-					$tpl->setVariable("vorderen","<a href='vorderen.php?msID=".$vs["id"]."&werf=".$WerfID."' onclick=\"return parent.GB_showCenter2('Supervisie - Vorderen', this.href)\"><img src='images/book--plus.png'></a>");
-					$tpl->setVariable("opmeten","<a href='opmeten.php?msID=".$vs["id"]."&werf=".$WerfID."' onclick=\"return parent.GB_showCenter2('Supervisie - Opmeten', this.href)\"><img src='images/ruler--plus.png'></a>");
-				
+					$tpl->setVariable("vorderen","<a href='vorderen.php?msID=".$vs["id"]."&werf=".$WerfID."' onclick=\"return 						parent.GB_showCenter2('Supervisie - Vorderen', this.href)\"><img src='images/book--plus.png'></a>");
+					
+					$tpl->setVariable("opmeten","<a href='opmeten.php?msID=".$vs["id"]."&werf=".$WerfID."' onclick=\"return parent.GB_showCenter2('Supervisie - Opmeten', this.href)\"><img src='images/ruler--plus.png'></a>");	
+					
+					$tpl->setVariable("tooltip","<span class='formInfo'><a href='jquery/jquery-tooltip/linken.htm?width=250' class='jTip' id='tree' name='Posten aan elkaar linken'>?</a></span>");
+
 				}
 				
 				$tpl->setVariable("class","vs");
@@ -176,7 +196,7 @@
 		}
 		
 		$tpl->parseCurrentBlock();
-	}
+//	}
 	//********************* Template Tonen *************
 	
 	$tpl->show(); //moet ge doen, anders ziede niet

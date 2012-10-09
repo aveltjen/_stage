@@ -6,9 +6,10 @@
 	require("inc/werven.da.inc.php");
 	require("inc/meetstaat.da.inc.php");
 	require("inc/vorderingen.da.inc.php");
-
-	$ebits = ini_get('error_reporting');
-error_reporting($ebits ^ E_NOTICE);
+	require("inc/link.da.inc.php");
+	require("inc/opmetingen.da.inc.php");
+	require("inc/functions.inc.php");
+	
 	//*********Check user session***************	
 	if(!isset($_SESSION["user"])){
 		header("Location: ../../index.php");
@@ -50,7 +51,28 @@ error_reporting($ebits ^ E_NOTICE);
 	$tpl->setVariable("omschrijving",$post["omschrijving"]);
 	$tpl->setVariable("eenheden",$post["eenheden"]);
 	$tpl->setVariable("hoeveelheid",$post["voorziene_hv"]);
-
+	
+		//links ophalen
+		$data = SelectLinkByPost($msID);
+		$tpl->setCurrentBlock("links");
+			if($data != NULL){
+				$output = "";
+				while($row = $data->fetchrow(MDB2_FETCHMODE_ASSOC)){
+								$link = $row["idmeetstaat_link"];
+								
+											$post = GetPostByID($link,$werf);
+											$tpl->setVariable("norecords","");	
+											$tpl->setVariable("links","<td align='left'><input id='link' type='checkbox' name='selecteren[]' value='".$link."' checked/><span class='checkbox_link'>".$post["nummer"]."</span></td>");
+												
+											$output .= "<tr bgcolor='#fccbcb'><td>".$post["nummer"]."</td><td>".$post["omschrijving"]."</td></tr>";
+	
+								$tpl->parseCurrentBlock();
+				}
+			$tpl->setVariable("meerinfo",$output);	
+			}else{
+				$tpl->setVariable("norecords","<td>--geen linken--</td>");
+			}
+	
 	//get date
 	//laatst ingegeven vorderingsdatum weergeven
 // 	$today = date('Y-m-d');
@@ -130,10 +152,17 @@ error_reporting($ebits ^ E_NOTICE);
 		$timestamp = mktime(0,0,0,$date[1],$date[2],$date[0]);
 		
 		$periode_new = date("m-Y", $timestamp);
+			
+		$list = getVorderingenSameKey($vid);
+			while($row = $list->fetchrow(MDB2_FETCHMODE_ASSOC)){
+			 		$vid2 = $row["idvordering"];
+					UpdateVordering($vid2,$datum_new,$omschrijving_new,$uitgevoerd_new,$periode_new,$werf);
+			}
 		
-		UpdateVordering($vid,$datum_new,$omschrijving_new,$uitgevoerd_new,$periode_new,$werf);
+				
+				
 		
-		//UPDATE MEETSTAAT
+		//UPDATE MEETSTAAT(gelinkte posten)
 		//VORDERINGEN OPHALEN
 			
 		$vorderingen = GetVorderingenByPost($msID,$werf);
@@ -178,8 +207,20 @@ error_reporting($ebits ^ E_NOTICE);
 		
 		$werf = $_REQUEST["werf"];
 		$vid = $_REQUEST["vid"];
-
-		deleteVordering($vid,$werf);
+		
+		//check vid posts
+		$list = CheckLinkVordering($vid);
+		
+		if($list != NULL){
+			foreach($list as $key){
+				deleteVordering($key,$werf);
+				DeleteLinkVordering($key);
+			}
+		}else{
+			deleteVordering($vid,$werf);
+		}
+		
+		
 		
 		//UPDATE MEETSTAAT
 		//VORDERINGEN OPHALEN
@@ -195,33 +236,127 @@ error_reporting($ebits ^ E_NOTICE);
 		}else {
 			
 		}
+
+	
+	//DOORSTUREN NAAR OPMETING
+	if($_REQUEST["action"]== "opmeten"){
+		
+		$tpl->setVariable("txt_delete","
+		
+		
+		<table width='100%' border='0' class='tekstnormal' bgcolor='#fae3e3'>
+		<tr>
+			<td align='center' colspan='2'><img src='images/exclamation.png' > Vordering met onderstaand ID doorsturen naar opmeting?<br><b>ID " .$_REQUEST["vid"]."</b></td>
+		</tr>
+		<tr>
+			<td colspan='2' align='center'>
+				<table width='150' border='0'>
+				<tr>
+					<td width='50%'><img src='images/tick-shield.png'> <a href='?msID=".$msID."&werf=".$werf."&opmeten=yes&vid=".$_REQUEST["vid"]."'>Ja</a></td>
+					<td width='50%'><img src='images/cross-shield.png'> <a href='?msID=".$msID."&werf=".$werf."'>Nee</a> </td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<br>
+		");
+	}
+	
+	if($_REQUEST["opmeten"]== "yes"){
+		
+		$werf = $_REQUEST["werf"];
+		$vid = $_REQUEST["vid"];
+		$user = $user["id"];
+		
+		
+		$row = GetVorderingByVid($vid,$werf);
+		
+		$omschrijving = $row["omschrijving"];
+		$datum = $row["datum"];
+		$uitgevoerd = $row["uitgevoerd"];
+		$bijlage = "";
+		
+		addOpmeting($werf,$user,$msID,$datum,$omschrijving,$uitgevoerd,$bijlage);
+			
+ 					
+		//Update meetstaat
+		//OPMETINGEN OPHALEN
+		$opmetingen = GetOpmetingenByPost($msID,$werf);
+		
+		$oh = 0;
+			while($opmeting = $opmetingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
+
+				$oh = $oh + $opmeting["uitgevoerd"];	
+			}
+		UpdateOH($oh,$msID,$werf);
+
+	}
 	
 	//VORDERING TOEVOEGEN
 	if($_REQUEST["action"]=="add"){
-		$werf = $_REQUEST["werf"];
-		$user = $user["id"];
-		$msID = $_REQUEST["msID"];
-		$vs = $_REQUEST["vs"];
-		$omschrijving = mysql_real_escape_string($_REQUEST["omschrijving"]);
-		$uitgevoerd = str_replace(",", ".", $_REQUEST["uitgevoerd"]);
-		$datum = $_REQUEST["datum"];
+	
+	
+		$add = $_REQUEST["selecteren"];
+		$msID = $_REQUEST["msID"];	
 		
-		$date = explode("-",$datum); 
-		$timestamp = mktime(0,0,0,$date[1],$date[2],$date[0]);
+			$werf = $_REQUEST["werf"];
+			$user = $user["id"];
+			$vs = $_REQUEST["vs"];
+			$omschrijving = mysql_real_escape_string($_REQUEST["omschrijving"]);
+			$uitgevoerd = str_replace(",", ".", $_REQUEST["uitgevoerd"]);
+			$datum = $_REQUEST["datum"];
+
+			$date = explode("-",$datum); 
+			$timestamp = mktime(0,0,0,$date[1],$date[2],$date[0]);
+			$periode = date("m-Y", $timestamp);
 		
-		$periode = date("m-Y", $timestamp);
-		addVordering($werf,$user,$msID,$vs,$datum,$omschrijving,$uitgevoerd,$periode);
-		
-						//UPDATE MEETSTAAT
-						//VORDERINGEN OPHALEN
-					
-						$vorderingen = GetVorderingenByPost($msID,$werf);
-						$gh = 0;
-							while($vordering = $vorderingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
-								$gh = $gh + $vordering["uitgevoerd"];
-							}
-		
-						UpdateGH($gh,$msID,$werf);
+		if(!isset($_REQUEST["selecteren"])){
+			$msID = $_REQUEST["msID"];
+			
+			addVordering($werf,$user,$msID,$vs,$datum,$omschrijving,$uitgevoerd,$periode);
+
+							//UPDATE MEETSTAAT
+							//VORDERINGEN OPHALEN
+
+							$vorderingen = GetVorderingenByPost($msID,$werf);
+							$gh = 0;
+								while($vordering = $vorderingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
+									$gh = $gh + $vordering["uitgevoerd"];
+								}
+
+							UpdateGH($gh,$msID,$werf);
+			
+		}else{
+			//links toevoegen
+			array_push($add, $msID);
+			
+			//unieke linkcode genereren
+			$key = generatekey(20);
+				
+				foreach ($add as $msID){
+						
+						
+						addVordering($werf,$user,$msID,$vs,$datum,$omschrijving,$uitgevoerd,$periode);
+						$IDvordering = mysql_insert_id();
+						addKey($werf,$IDvordering,$key);
+						
+										//UPDATE MEETSTAAT
+										//VORDERINGEN OPHALEN
+
+										$vorderingen = GetVorderingenByPost($msID,$werf);
+										$gh = 0;
+											while($vordering = $vorderingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
+												$gh = $gh + $vordering["uitgevoerd"];
+											}
+
+										UpdateGH($gh,$msID,$werf);		
+				}
+			
+		}
+			
+	
+						
 	}
 	
 	//VORDERINGEN OPHALEN
@@ -233,8 +368,10 @@ error_reporting($ebits ^ E_NOTICE);
 		$tpl->setVariable("datum",$vordering["datum"]);
 		$tpl->setVariable("omschrijving_vordering",wordwrap($vordering["omschrijving"], 42, "\n", true));
 		$tpl->setVariable("uitgevoerd",number_format($vordering["uitgevoerd"],3,',',''));
+		$tpl->setVariable("id",$vordering["id"]);
 		$tpl->setVariable("delete","<a href='?msID=".$msID."&werf=".$werf."&action=delete&vid=".$vordering["id"]."'><img src='images/cross.png'></a>");
 		$tpl->setVariable("wijzig","<a href='?msID=".$msID."&werf=".$werf."&action=wijzig&vid=".$vordering["id"]."'><img src='images/bin--pencil.png'></a>");
+			$tpl->setVariable("opmeten","<a href='?msID=".$msID."&werf=".$werf."&action=opmeten&vid=".$vordering["id"]."'><img src='images/ruler--arrow.png'></a>");
 		
 		$totaal = $totaal + $vordering["uitgevoerd"];
 		$tpl->setVariable("totaal",number_format($totaal,3,',',''));

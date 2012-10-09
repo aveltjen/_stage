@@ -6,8 +6,9 @@
 	require("inc/documents.da.inc.php");
 	require("inc/werven.da.inc.php");
 
-	// $ebits = ini_get('error_reporting');
-	// 	error_reporting($ebits ^ E_NOTICE);
+	$ebits = ini_get('error_reporting');
+	error_reporting($ebits ^ E_NOTICE);
+
 	//*********Check user session***************	
 	if(!isset($_SESSION["user"])){
 		header("Location: ../../index.php");
@@ -30,9 +31,9 @@
 	}
 	
 	//** Documenten ophalen ophalen
-// 	print_r($user);
+	// print_r($user);
 	$id			= $user["id"];
-	$group = $user["groupid"];
+	
 	$upload_dir	= "../../../files_dir/uploads/documents".$id."/server/php/";
 
 	//** Profiel ophalen
@@ -85,9 +86,6 @@
 			$tpl->setVariable("id",$werf["id"]);
 			$tpl->setVariable("Number",$werf["nummer"]);
 		
-			$tpl->setVariable("Year",$werf["year"]);
-			$tpl->setVariable("Month",$werf["month"]);
-			$tpl->setVariable("Day",$werf["day"]);
 			$tpl->setVariable("icon","<img src='images/box--arrow.png'>");
 			$tpl->parseCurrentBlock();
 		}
