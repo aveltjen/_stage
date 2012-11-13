@@ -45,13 +45,11 @@ function newWindow(mypage,myname,w,h,features) {
 							</select>
 						
 					</td>
-					<td>
-						<button type="submit">Raadplegen</button>&nbsp;&nbsp;&nbsp;{printen}&nbsp;{printen2}
+					<td width="250">
+						&nbsp;&nbsp;<button type="submit">Raadplegen</button>&nbsp;&nbsp;{printen}{printen2}
 						</form>
 					</td>
-					<td>
-						
-					</td>
+				
 				</tr>
 			</table>
 		</td>

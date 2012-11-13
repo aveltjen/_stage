@@ -115,6 +115,7 @@ document.all.hidepage.style.visibility = 'hidden';
 											<p>
 												<fieldset>
 												<legend class="tekstlegend">Posten gekoppeld</legend>
+												<div class="posten_linken_scroll">
 												<table width="100%" cellpadding="2" border="0" cellspacing="1" class="tekstnormal">
 														<!-- BEGIN link -->
 														<tr bgcolor="#fccbcb">
@@ -125,6 +126,7 @@ document.all.hidepage.style.visibility = 'hidden';
 														<!-- END link -->
 														{norecords}
 												</table>
+												</div>
 												</fieldset>
 											</p>
 									</td>

@@ -8,7 +8,7 @@
 	require("inc/link.da.inc.php");
 
 	$ebits = ini_get('error_reporting');
-error_reporting($ebits ^ E_NOTICE);
+	//error_reporting($ebits ^ E_NOTICE);
 
 	//*********Check user session***************	
 	if(!isset($_SESSION["user"])){

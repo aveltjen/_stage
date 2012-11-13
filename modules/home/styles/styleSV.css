@@ -427,3 +427,9 @@ z-index:2;
 .show_hide {
     display:none;
 }
+
+.posten_linken_scroll{
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 320px;
+}

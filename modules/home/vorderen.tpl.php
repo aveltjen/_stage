@@ -45,7 +45,6 @@ function newWindow(mypage,myname,w,h,features) {
 		
 	
 	$(function(){        
-	      
 	        $('#mySubmitBtn').click(function() {
 		           $( "#dialog-confirm" ).dialog({
 							resizable: false,
@@ -62,6 +61,15 @@ function newWindow(mypage,myname,w,h,features) {
 							}
 						});
 		        });
+	});
+	
+	$(function(){        
+	        
+		$('#mySubmitBtn2').click(function()
+		{ 
+			$('#addvordering').submit();
+		});
+				
 	});
 	
 	$(document).ready(function(){
@@ -174,7 +182,7 @@ function newWindow(mypage,myname,w,h,features) {
                             			<tr align="left" class="tip">
                             				<td>Datum:</td>
                             				<td><input type="text" size="15" id="date" name="datum" value="{lastdate}"/>&nbsp;<span class="formInfo"><a href="jquery/jquery-tooltip/datum.htm?width=250" class="jTip" id="tree" name="Datum vordering invoeren">?</a></span>&nbsp;</td>
-                            				<td align="right"><a href="?lastvordering=1&msID={msID}&werf={werf}"><img src="images/calendar_add.png"></a><span class="formInfo"><a href="jquery/jquery-tooltip/history.htm?width=280" class="jTip" id="two" name="Laatste vordering oproepen">?</a></span>&nbsp;<button id="mySubmitBtn" type="button">opslaan</button></td>
+                            				<td align="right"><a href="?lastvordering=1&msID={msID}&werf={werf}"><img src="images/calendar_add.png"></a><span class="formInfo"><a href="jquery/jquery-tooltip/history.htm?width=280" class="jTip" id="two" name="Laatste vordering oproepen">?</a></span>&nbsp;<button id="{save_btn}" type="button">opslaan</button></td>
                             			</tr>
                             			<tr align="left">
                             				<td>Omschrijving:</td>
@@ -200,11 +208,11 @@ function newWindow(mypage,myname,w,h,features) {
                             			<tr>
                             				<td valign="top">
                             			<div id="vorderlistkop">	
-                            			<table width="645" border="0" cellpadding="2" cellspacing="1">
+                            			<table width="625" border="0" cellpadding="2" cellspacing="1">
                             			<tr class="tekstnormal" bgcolor="#EFEFEF" align="left">
 											<td width="20"></td>
 											<td width="80"><b>ID</b></td>
-											<td width="88"><b>Datum</b></td>
+											<td width="80"><b>Datum</b></td>
 											<td width="248"><b>Omschrijving</b></td>
 											<td width="88"><b>Uitgevoerd</b></td>
 											<td width="25">&nbsp;</td>
@@ -214,12 +222,12 @@ function newWindow(mypage,myname,w,h,features) {
 										</table>
 										</div>
 										<div id="vorderlist">
-										<table width="645" border="0" cellpadding="2" cellspacing="1">
+										<table width="625" border="0" cellpadding="2" cellspacing="1">
                             			<!-- BEGIN vorderingen -->
                             			<tr class="drukrows" align="left">
 											<td width="20">{icon}</td>
 											<td width="80">{id}</td>
-											<td width="88">{datum}</td>
+											<td width="80">{datum}</td>
 											<td width="248">{omschrijving_vordering}</td>
 											<td width="88">{uitgevoerd}</td>
 											<td width="25" align="center">{delete}</td>
