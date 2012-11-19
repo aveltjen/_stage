@@ -94,25 +94,25 @@ while($post = $posten->fetchrow(MDB2_FETCHMODE_ASSOC)){
 	$eprijs = number_format($eprijs_ruw,'2',',',' ');
 	
 	//POST GEGEVENS OPHALEN	
-	//MEETSTAAT ID
-	$msID = $post["idmeetstaat"];	
-
-	$description = GetExtraInfoPost($msID,$werf);
-
-	if(!empty($description))
-	{
-		foreach($description as $value)
-		{
-			if($value != ""){
-				$row = "".$value."\n";
-
-			}
-
-		}
-
-	}
+			//MEETSTAAT ID
+			$msID = $post["idmeetstaat"];	
+		
+			// $description = GetExtraInfoPost($msID,$werf);
+			// 		
+			// 			if(!empty($description))
+			// 			{
+			// 				foreach($description as $value)
+			// 				{
+			// 					if($value != ""){
+			// 						$row = "".$value."\n";
+			// 		
+			// 					}
+			// 		
+			// 				}
+			// 		
+			// 			}
 	
-	$omschrijving = "<bsmall>...".wordwrap($row."</bsmall>\n".$post["omschrijving"],150,"\n")."";
+	$omschrijving = "".wordwrap($row."\n".$post["omschrijving"],150,"\n")."";
 	
 	//Initialize the table class, 5 columns with the specified widths
 	$oTable->initialize(array(50, 30, 30, 25, 25));
