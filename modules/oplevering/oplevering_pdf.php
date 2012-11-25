@@ -9,8 +9,8 @@
 	require("inc/werven.da.inc.php");
 	require("inc/users.da.inc.php");
 	
-	$ebits = ini_get('error_reporting');
-	error_reporting($ebits ^ E_NOTICE);
+	// $ebits = ini_get('error_reporting');
+	// 	error_reporting($ebits ^ E_NOTICE);
 	
 		
 	//WERF ID GETTEN
@@ -67,6 +67,8 @@
 	 */
 	$oTable->setStyle("p","times","",10,"130,0,30");
 	$oTable->setStyle("b","arial","B",9,"0,0,0");
+	$oTable->setStyle("bsmall","arial","B",7,"0,0,0");
+	$oTable->setStyle("desc","arial","",7,"0,0,0");
 	$oTable->setStyle("t1","arial","",9,"0,0,0");
 	$oTable->setStyle("t2","arial","I",7,"0,0,0");
 	$oTable->setStyle("bi","times","BI",12,"0,0,120");
@@ -90,7 +92,27 @@ while($post = $posten->fetchrow(MDB2_FETCHMODE_ASSOC)){
 	$hoeveelheid = number_format($hoeveelheid_ruw,'3',',',' ');
 	$eprijs_ruw = $post["prijs"];
 	$eprijs = number_format($eprijs_ruw,'2',',',' ');
-	$omschrijving = $post["omschrijving"];
+	
+	//POST GEGEVENS OPHALEN	
+			//MEETSTAAT ID
+			$msID = $post["idmeetstaat"];	
+		
+			// $description = GetExtraInfoPost($msID,$werf);
+			// 		
+			// 			if(!empty($description))
+			// 			{
+			// 				foreach($description as $value)
+			// 				{
+			// 					if($value != ""){
+			// 						$row = "".$value."\n";
+			// 		
+			// 					}
+			// 		
+			// 				}
+			// 		
+			// 			}
+	
+	$omschrijving = "".wordwrap($row."\n".$post["omschrijving"],150,"\n")."";
 	
 	//Initialize the table class, 5 columns with the specified widths
 	$oTable->initialize(array(50, 30, 30, 25, 25));

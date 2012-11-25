@@ -7,7 +7,7 @@
 			global $db;
 			
 
-			$vslist = $db->query("SELECT * FROM v_meetstaat_werf_".$werf."");
+			$vslist = $db->query("SELECT * FROM v_meetstaat_werf_".$werf." ");
 			
 			return $vslist;
 		}

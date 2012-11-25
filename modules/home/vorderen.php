@@ -68,9 +68,11 @@
 	
 								$tpl->parseCurrentBlock();
 				}
-			$tpl->setVariable("meerinfo",$output);	
+			$tpl->setVariable("meerinfo",$output);
+			$tpl->setVariable("save_btn","mySubmitBtn");
 			}else{
 				$tpl->setVariable("norecords","<td>--geen linken--</td>");
+				$tpl->setVariable("save_btn","mySubmitBtn2");
 			}
 	
 	//get date

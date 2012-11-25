@@ -7,6 +7,8 @@
 	require("inc/meetstaat.da.inc.php");
 	require("inc/link.da.inc.php");
 	
+	//$ebits = ini_get('error_reporting');
+	//error_reporting($ebits ^ E_NOTICE);
 
 	//*********Check user session***************	
 	if(!isset($_SESSION["user"])){
@@ -65,9 +67,7 @@
 	$tpl->setVariable("description",$string);
 	$tpl->setVariable("id",$werf["id"]);
 	
-	
-	
-	
+
 	//** Vorderingsstaat ophalen
 	$vslist = GetFullVorderingsstaatByWerf($WerfID);
 	

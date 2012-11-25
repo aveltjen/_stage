@@ -106,7 +106,12 @@ document.all.hidepage.style.visibility = 'hidden';
 													<form action="historiek.php?werf={id}&historiek=show" target="_blank" method="POST">
 													<table class="tekstnormal" width="840">
 													<tr>
-														
+													<td align="left">
+													<a href="startwerf_pdf.php?werf={id}"><img src='images/document-pdf.png'> meetstaat downloaden</a>
+													</td>
+													<td>
+													</td>
+
 													<td align="right" height="30">
 													<input type="submit" value="historiek opvragen"/>
 													</td>
