@@ -99,12 +99,35 @@
 	if($_REQUEST["action"]== "wijzig"){
 		//VORDERINGGEGEVENS OPHALEN
 		$vid = $_REQUEST["vid"];
+		$werf = $_REQUEST["werf"];
 		
 		$vordering = GetVorderingByVid($vid,$werf);
 		
 		$datum_old = $vordering["datum"];
 		$omschrijving_old = $vordering["omschrijving"];
 		$uitgevoerd_old = number_format($vordering["uitgevoerd"],3,',','');
+		
+			$list = CheckLinkVordering($vid);
+
+				if($list != NULL){
+					$opm = "<font color='red'>Let op!!! Deze vordering wordt gewijzigd in de volgende postnummers: ";
+					foreach($list as $key => $waarde){
+						//get msID by vorderingen
+						$vordering = GetVorderingByVid($waarde,$werf);
+					
+						$msID = $vordering["idmeetstaat"];
+						
+						$post = GetPostByID($msID, $werf);
+						$postnummer = $post["nummer"];
+						if($key === 0){
+							$opm .= "<b>".$postnummer."<b>";
+						}else{
+							$opm .= "<b>, ".$postnummer."<b>";
+						}
+						
+					}
+					$opm .= "</font>";
+				}
 		
 		$tpl->setVariable("txt_wijzig","
 		
@@ -130,7 +153,7 @@
                             			<tr>
                             				<td>Uitgevoerd:</td>
                                             <td><input type='text' size='10' name='uitgevoerd_new' value='".$uitgevoerd_old."' /></td>
-                                            <td></td>
+                                            <td>".$opm."</td>
                             			</tr>
                             		</table>
                 </form>
@@ -155,14 +178,18 @@
 		
 		$periode_new = date("m-Y", $timestamp);
 			
-		$list = getVorderingenSameKey($vid);
-			while($row = $list->fetchrow(MDB2_FETCHMODE_ASSOC)){
-			 		$vid2 = $row["idvordering"];
-					UpdateVordering($vid2,$datum_new,$omschrijving_new,$uitgevoerd_new,$periode_new,$werf);
+		//$list = getVorderingenSameKey($vid);
+		//check vid posts
+		$list = CheckLinkVordering($vid);
+
+			if($list != NULL){
+				foreach($list as $key){
+					UpdateVordering($key,$datum_new,$omschrijving_new,$uitgevoerd_new,$periode_new,$werf);
+				}
+			}else{
+				UpdateVordering($vid,$datum_new,$omschrijving_new,$uitgevoerd_new,$periode_new,$werf);
 			}
-		
-				
-				
+					
 		
 		//UPDATE MEETSTAAT(gelinkte posten)
 		//VORDERINGEN OPHALEN
@@ -181,6 +208,29 @@
 	
 	//VORDERING VERWIJDEREN
 	if($_REQUEST["action"]== "delete"){
+		$vid = $_REQUEST["vid"];
+		
+		$list = CheckLinkVordering($vid);
+
+			if($list != NULL){
+				$opm = "<font color='red'>Let op!!! Deze vordering wordt verwijderd in de volgende postnummers: ";
+				foreach($list as $key => $waarde){
+					//get msID by vorderingen
+					$vordering = GetVorderingByVid($waarde,$werf);
+				
+					$msID = $vordering["idmeetstaat"];
+					
+					$post = GetPostByID($msID, $werf);
+					$postnummer = $post["nummer"];
+					if($key === 0){
+						$opm .= "<b>".$postnummer."<b>";
+					}else{
+						$opm .= "<b>, ".$postnummer."<b>";
+					}
+					
+				}
+				$opm .= "</font>";
+			}
 		
 		$tpl->setVariable("txt_delete","
 		
@@ -198,6 +248,9 @@
 				</tr>
 				</table>
 			</td>
+		</tr>
+		<tr>
+			<td align='center' colspan='2'>".$opm."</td>
 		</tr>
 		</table>
 		<br>
