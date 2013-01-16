@@ -179,8 +179,9 @@ while($post = $posten->fetchrow(MDB2_FETCHMODE_ASSOC)){
 		$uitgevoerd = $opmeting["uitgevoerd"];
 		
 		if($opmeting["bijlage1"] != ""){
+			// $link = "<a href='http://supervisie.owt.be/files_dir/uploads/opmetingen".$userId."/".$opmeting["bijlage1"]."'>click to download</a>";
 			$link = "<a href='".$root."/files_dir/uploads/opmetingen".$userId."/".$opmeting["bijlage1"]."'>click to download</a>";
-		}else{
+			}else{
 			$link = "";
 		}
 			
