@@ -74,6 +74,14 @@
 	$oTable->setStyle("bi","times","BI",12,"0,0,120");
 	$oTable->setStyle("t3","arial","U",7,"36,46,243");
 	
+	//change multiple values
+	$aCustomConfiguration = array(
+	        'TABLE' => array(
+	                'TABLE_ALIGN'       => 'C',                 //left align
+	                'BORDER_COLOR'      => array(0, 0, 0),      //border color
+	                'BORDER_SIZE'       => '0.2',               //border size
+	        )
+	);
 
 //LOAD DATA
 $totaal = 0;
@@ -115,20 +123,23 @@ while($post = $posten->fetchrow(MDB2_FETCHMODE_ASSOC)){
 	$omschrijving = "".wordwrap($row."\n".$post["omschrijving"],150,"\n")."";
 	
 	//Initialize the table class, 5 columns with the specified widths
-	$oTable->initialize(array(50, 30, 30, 25, 25));
+	$oTable->initialize(array(50, 30, 30, 25, 25), $aCustomConfiguration);
 	
 	$aRow = Array();
 	$aRow[0]['BACKGROUND_COLOR'] = array(236, 185, 124);
 	$aRow[0]['TEXT'] = "<b>Postnr.: </b><t1>$nummer</t1>";
 	$aRow[0]['TEXT_ALIGN'] = "L";
+	$aRow[0]['BORDER_COLOR'] = array(0, 0, 0);
 	$aRow[1]['BACKGROUND_COLOR'] = array(236, 185, 124);
 	$aRow[1]['COLSPAN'] = 2;
 	$aRow[1]['TEXT'] = "<b>V.H.: </b><t1>$hoeveelheid</t1>";
 	$aRow[1]['TEXT_ALIGN'] = "C";
+	$aRow[1]['BORDER_COLOR'] = array(0, 0, 0);
 	$aRow[3]['BACKGROUND_COLOR'] = array(236, 185, 124);
 	$aRow[3]['COLSPAN'] = 2;
 	$aRow[3]['TEXT'] = "<b>Eenheidsprijs: </b><t1>".EUR." $eprijs</t1>";
 	$aRow[3]['TEXT_ALIGN'] = "L";
+	$aRow[3]['BORDER_COLOR'] = array(0, 0, 0);
 	
 	$oTable->addRow($aRow);
 	
@@ -136,6 +147,7 @@ while($post = $posten->fetchrow(MDB2_FETCHMODE_ASSOC)){
 	$aRow[0]['TEXT'] = $omschrijving;
 	$aRow[0]['COLSPAN'] = 5;
 	$aRow[0]['TEXT_ALIGN'] = "L";
+	$aRow[0]['BORDER_COLOR'] = array(0, 0, 0);
 	$oTable->addRow($aRow);
 	
 	$res = GetTotaalOpgemetenPerPost($werf, $msID);
@@ -145,15 +157,18 @@ while($post = $posten->fetchrow(MDB2_FETCHMODE_ASSOC)){
 	$aRow[0]['COLSPAN'] = 2;
 	$aRow[0]['TEXT'] = '<b>Totaal opgemeten: '.number_format($res,'3',',',' ').'</b>';
 	$aRow[0]['TEXT_ALIGN'] = "L";
+	$aRow[0]['BORDER_COLOR'] = array(0, 0, 0);
 	$aRow[2]['COLSPAN'] = 3;
 	$aRow[2]['TEXT'] = '<b>Totaal prijs: '.EUR.' '.number_format($prijs,'2',',',' ').'</b>';
 	$aRow[2]['TEXT_ALIGN'] = "L";
+	$aRow[2]['BORDER_COLOR'] = array(0, 0, 0);
 	$oTable->addRow($aRow);
 	
 	$aRow = Array();
 	$aRow[0]['TEXT'] = " ";
 	$aRow[0]['COLSPAN'] = 5;
 	$aRow[0]['TEXT_ALIGN'] = "L";
+	$aRow[0]['BORDER_COLOR'] = array(0, 0, 0);
 	$oTable->addRow($aRow);
 	
 	// Load data
@@ -165,14 +180,18 @@ while($post = $posten->fetchrow(MDB2_FETCHMODE_ASSOC)){
 	$aRow[0]['TEXT'] = '<t1>Omschrijving/Berekening</t1>';
 	$aRow[0]['TEXT_ALIGN'] = "L";
 	$aRow[0]['BACKGROUND_COLOR'] = array(235, 235, 235);
+	$aRow[0]['BORDER_COLOR'] = array(0, 0, 0);
 	$aRow[3]['TEXT'] = '<t1>Uitgevoerd</t1>';
 	$aRow[3]['TEXT_ALIGN'] = "L";
 	$aRow[3]['BACKGROUND_COLOR'] = array(235, 235, 235);
+	$aRow[3]['BORDER_COLOR'] = array(0, 0, 0);
 	$aRow[4]['TEXT'] = '<t1>Bijlage</t1>';
 	$aRow[4]['TEXT_ALIGN'] = "C";
 	$aRow[4]['BACKGROUND_COLOR'] = array(235, 235, 235);
+	$aRow[4]['BORDER_COLOR'] = array(0, 0, 0);
 	$oTable->addRow($aRow);
 	
+	$rijnummer = 0;
 	while($opmeting = $opmetingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
 			
 		$berekening = $opmeting["berekening"];
@@ -189,11 +208,21 @@ while($post = $posten->fetchrow(MDB2_FETCHMODE_ASSOC)){
 		$aRow[0]['COLSPAN'] = 3;
 		$aRow[0]['TEXT'] = '<t2>'.wordwrap($berekening, 60, " ", true).'</t2>';
 		$aRow[0]['TEXT_ALIGN'] = "L";
+		$aRow[0]['BORDER_COLOR'] = array(0, 0, 0);
 		$aRow[3]['TEXT'] = '<t2>'.number_format($uitgevoerd,'3',',',' ').'</t2>';
 		$aRow[3]['TEXT_ALIGN'] = "L";
+		$aRow[3]['BORDER_COLOR'] = array(0, 0, 0);
 		$aRow[4]['TEXT'] = '<t3>'.$link.'</t3>';
 		$aRow[4]['TEXT_ALIGN'] = "C";
+		$aRow[4]['BORDER_COLOR'] = array(0, 0, 0);
+		if($rijnummer % 2){
+			$aRow[0]['BACKGROUND_COLOR'] = array(224, 235, 255);
+			$aRow[3]['BACKGROUND_COLOR'] = array(224, 235, 255);
+			$aRow[4]['BACKGROUND_COLOR'] = array(224, 235, 255);
+		}
+		
 		$oTable->addRow($aRow);
+		$rijnummer++;
 		
 		$opgemeten = $opgemeten + $uitgevoerd;
 			
