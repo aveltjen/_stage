@@ -54,7 +54,7 @@
 	$oFpdf->Cell(10,7,'Toezichter: '.	$naam.'');
 	$oFpdf->Ln();
 	$oFpdf->SetFont('Arial','B','10');	
-	$oFpdf->Line(20, 52, 200,52);
+	// $oFpdf->Line(20, 52, 200,52);
 	$oFpdf->Ln();
 	$oFpdf->SetFont('','','10');
 	
@@ -154,7 +154,7 @@
 		
 	$oFpdf->Cell(180,20,'Totaal bedrag vorderingstaat: '.EUR.' '.number_format($tbedrag, 2, ',', ' ').'','','','R');
 	$oFpdf->Ln();
-	$oFpdf->SetFont('','','11');
+//	$oFpdf->SetFont('','','11');
 	
 	
 
@@ -164,12 +164,12 @@
 	 * Set the tag styles
 	 */
 	$oTable->setStyle("p","times","",10,"130,0,30");
-	$oTable->setStyle("b","arial","B",7,"0,0,0");
+	$oTable->setStyle("b","arial","B",9,"0,0,0");
 	$oTable->setStyle("t1","arial","",9,"0,0,0");
-	$oTable->setStyle("t2","arial","I",7,"0,0,0");
+	$oTable->setStyle("t2","arial","I",9,"0,0,0");
 	$oTable->setStyle("bi","times","BI",12,"0,0,120");
-	$oTable->setStyle("t3","arial","U",7,"36,46,243");
-	$oTable->setStyle("kop","arial","B",7,"0,0,0");
+	$oTable->setStyle("t3","arial","U",9,"36,46,243");
+	$oTable->setStyle("kop","arial","B",9,"0,0,0");
 
 	
 	//change multiple values
@@ -217,7 +217,7 @@
 			$tbedrag = 0;
 			
 			$posten = GetPostByPeriode($periode,$werf);
-			
+			$rijnummer = 0;
 			while($post = $posten->fetchrow(MDB2_FETCHMODE_ASSOC)){
 				$aRow = Array();
 				
@@ -230,7 +230,9 @@
 				$aRow[0]['TEXT'] = $msNummer;
 				$aRow[0]['TEXT_ALIGN'] = "C";
 				$aRow[0]['BORDER_COLOR'] = array(0, 0, 0);
-				
+				if($rijnummer % 2){
+					$aRow[0]['BACKGROUND_COLOR'] = array(224, 235, 255);
+				}
 				
 				//3#VORIGE HOEVEELHEID OPZOEKEN				
 				$resultaat = GetAllVorigeVorderingenByPeriode($msID,$parameter2,$werf);
@@ -244,6 +246,9 @@
 				$aRow[1]['TEXT'] = number_format($vorige,'3',',',' ');
 				$aRow[1]['TEXT_ALIGN'] = "C";
 				$aRow[1]['BORDER_COLOR'] = array(0, 0, 0);
+				if($rijnummer % 2){
+					$aRow[1]['BACKGROUND_COLOR'] = array(224, 235, 255);
+				}
 				
 				
 				//4#hUIDIGE HOEVEELHEID VAN DE POST OPZOEKEN
@@ -258,6 +263,9 @@
 				$aRow[2]['TEXT'] = number_format($huidige,'3',',',' ');
 				$aRow[2]['TEXT_ALIGN'] = "C";
 				$aRow[2]['BORDER_COLOR'] = array(0, 0, 0);
+				if($rijnummer % 2){
+					$aRow[2]['BACKGROUND_COLOR'] = array(224, 235, 255);
+				}
 				
 				
 				//5#TOTAAL GEVORDERDE HOEVEELHEID
@@ -266,6 +274,9 @@
 				$aRow[3]['TEXT'] = number_format($totaal,'3',',',' ');
 				$aRow[3]['TEXT_ALIGN'] = "C";
 				$aRow[3]['BORDER_COLOR'] = array(0, 0, 0);
+				if($rijnummer % 2){
+					$aRow[3]['BACKGROUND_COLOR'] = array(224, 235, 255);
+				}
 				
 				//6#TOTAAL BEDRAG
 				$eprijs = $postnummer["prijs"];
@@ -274,12 +285,16 @@
 				$aRow[4]['TEXT'] = $bedrag;
 				$aRow[4]['TEXT_ALIGN'] = "C";
 				$aRow[4]['BORDER_COLOR'] = array(0, 0, 0);
-			
+				if($rijnummer % 2){
+					$aRow[4]['BACKGROUND_COLOR'] = array(224, 235, 255);
+				}
+				
 				//Totaal staat
 				$tbedrag= $prijs + $tbedrag;
 	 		
 	 		
 			$oTable->addRow($aRow);
+			$rijnummer++;
 		}
 		
 
