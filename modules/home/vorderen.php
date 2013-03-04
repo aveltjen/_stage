@@ -115,9 +115,9 @@
 						//get msID by vorderingen
 						$vordering = GetVorderingByVid($waarde,$werf);
 					
-						$msID = $vordering["idmeetstaat"];
+						$msID_link = $vordering["idmeetstaat"];
 						
-						$post = GetPostByID($msID, $werf);
+						$post = GetPostByID($msID_link, $werf);
 						$postnummer = $post["nummer"];
 						if($key === 0){
 							$opm .= "<b>".$postnummer."<b>";
@@ -185,22 +185,39 @@
 			if($list != NULL){
 				foreach($list as $key){
 					UpdateVordering($key,$datum_new,$omschrijving_new,$uitgevoerd_new,$periode_new,$werf);
+					
+					$vordering = GetVorderingByVid($key,$werf);
+				
+					$msID_wijz = $vordering["idmeetstaat"];
+					//UPDATE MEETSTAAT(gelinkte posten)
+					//VORDERINGEN OPHALEN
+
+					$vorderingen = GetVorderingenByPost($msID_wijz,$werf);
+					$gh = 0;
+					while($vordering = $vorderingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
+						$gh = $gh + $vordering["uitgevoerd"];
+					}
+
+					UpdateGH($gh,$msID_wijz,$werf);
+					
+					
 				}
 			}else{
 				UpdateVordering($vid,$datum_new,$omschrijving_new,$uitgevoerd_new,$periode_new,$werf);
-			}
-					
-		
-		//UPDATE MEETSTAAT(gelinkte posten)
-		//VORDERINGEN OPHALEN
+				
+				//UPDATE MEETSTAAT(gelinkte posten)
+				//VORDERINGEN OPHALEN
+
+				$vorderingen = GetVorderingenByPost($msID,$werf);
+				$gh = 0;
+				while($vordering = $vorderingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
+					$gh = $gh + $vordering["uitgevoerd"];
+				}
+
+				UpdateGH($gh,$msID,$werf);
 			
-		$vorderingen = GetVorderingenByPost($msID,$werf);
-		$gh = 0;
-		while($vordering = $vorderingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
-			$gh = $gh + $vordering["uitgevoerd"];
-		}
-		
-		UpdateGH($gh,$msID,$werf);
+			
+			}
 		
 	}else{
 		
@@ -218,9 +235,9 @@
 					//get msID by vorderingen
 					$vordering = GetVorderingByVid($waarde,$werf);
 				
-					$msID = $vordering["idmeetstaat"];
+					$msID_link = $vordering["idmeetstaat"];
 					
-					$post = GetPostByID($msID, $werf);
+					$post = GetPostByID($msID_link, $werf);
 					$postnummer = $post["nummer"];
 					if($key === 0){
 						$opm .= "<b>".$postnummer."<b>";
@@ -268,29 +285,45 @@
 		
 		if($list != NULL){
 			foreach($list as $key){
+				$vordering = GetVorderingByVid($key,$werf);
+				
 				deleteVordering($key,$werf);
 				DeleteLinkVordering($key);
+				
+				
+			
+				$msID_del = $vordering["idmeetstaat"];
+				
+				//UPDATE MEETSTAAT(gelinkte posten)
+				//VORDERINGEN OPHALEN
+
+				$vorderingen = GetVorderingenByPost($msID_del,$werf);
+				$gh = 0;
+				while($vordering = $vorderingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
+					$gh = $gh + $vordering["uitgevoerd"];
+				}
+
+				UpdateGH($gh,$msID_del,$werf);
+				
 			}
+			// print_r($list);
 		}else{
 			deleteVordering($vid,$werf);
+			//UPDATE MEETSTAAT
+			//VORDERINGEN OPHALEN
+
+			$vorderingen = GetVorderingenByPost($msID,$werf);
+			$gh = 0;
+			while($vordering = $vorderingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
+				$gh = $gh + $vordering["uitgevoerd"];
+			}
+
+			UpdateGH($gh,$msID,$werf);
 		}
-		
-		
-		
-		//UPDATE MEETSTAAT
-		//VORDERINGEN OPHALEN
-			
-		$vorderingen = GetVorderingenByPost($msID,$werf);
-		$gh = 0;
-		while($vordering = $vorderingen->fetchrow(MDB2_FETCHMODE_ASSOC)){
-			$gh = $gh + $vordering["uitgevoerd"];
-		}
-		
-		UpdateGH($gh,$msID,$werf);
 		
 		}else {
 			
-		}
+	}
 
 	
 	//DOORSTUREN NAAR OPMETING
