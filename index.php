@@ -5,7 +5,7 @@ require_once("PEAR/HTMLTemplate/IT.php");
 require("inc/users.da.inc.php");
 
 $ebits = ini_get('error_reporting');
-//error_reporting($ebits ^ E_NOTICE);	
+error_reporting($ebits ^ E_NOTICE);	
 
 //*********Template modifications***************
 $tpl = new HTML_Template_IT("./");
@@ -18,8 +18,8 @@ $tpl->setVariable("titel","Supervisie V3");
 if($_REQUEST["checklogin"] == true){
 	
 	//login request - user authenticate,  & put in session
-	$username = mysql_escape_string($_REQUEST["username"]);
-	$password = mysql_escape_string($_REQUEST["password"]);
+	$username = mysql_real_escape_string($_REQUEST["username"]);
+	$password = mysql_real_escape_string($_REQUEST["password"]);
 	
 	$user = AuthenticateUser($username, $password);
 	
@@ -27,7 +27,7 @@ if($_REQUEST["checklogin"] == true){
 
 		 $_SESSION["user"] = $user;
 		header("Location: modules/home/index.php");
-	}else{
+		
 		$tpl->setVariable('msg','<p>Gebruikersnaam of wachtwoord onjuist!!!</p>');
 	}
 	

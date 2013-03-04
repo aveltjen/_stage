@@ -2,9 +2,9 @@
 ############################################## ?>
 <?php
 	$dbUser = "root";
-	$dbPass = "";
+	$dbPass = "root";
 	$dbHost = "localhost";
-	$dbName = "supervisie";
+	$dbName = "_stage";
 
 	$db =& MDB2::connect("mysql://$dbUser:$dbPass@$dbHost/$dbName");
 	if (PEAR::isError($db)) {
