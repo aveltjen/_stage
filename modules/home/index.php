@@ -34,7 +34,7 @@
 	// print_r($user);
 	$id			= $user["id"];
 	
-	$upload_dir	= "../../../files_dir/uploads/documents".$id."/server/php/";
+	$upload_dir	= "../../files_dir/uploads/documents".$id."/server/php/";
 
 	//** Profiel ophalen
 	//user gegevens uit sessie halen

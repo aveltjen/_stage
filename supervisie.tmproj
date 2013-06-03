@@ -21,49 +21,61 @@
 	<integer>374</integer>
 	<key>metaData</key>
 	<dict>
+		<key>PEAR/HTMLTemplate/IT.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>24</integer>
+				<key>line</key>
+				<integer>23</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>3</integer>
+		</dict>
+		<key>PEAR/HTTP/Upload.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>7</integer>
+				<key>line</key>
+				<integer>22</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>22</integer>
+		</dict>
 		<key>PEAR/MDB2.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>24</integer>
 				<key>line</key>
 				<integer>56</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>34</integer>
 		</dict>
 		<key>inc/db.inc.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>18</integer>
 				<key>line</key>
-				<integer>13</integer>
+				<integer>6</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>5</integer>
-				<key>line</key>
-				<integer>17</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>13</integer>
-			</dict>
 		</dict>
 		<key>index.php</key>
 		<dict>
@@ -79,19 +91,19 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
-		<key>modules/home/inc/link.da.inc.php</key>
+		<key>modules/home/inc/meetstaat.da.inc.php</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>3</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>67</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>40</integer>
 		</dict>
 		<key>modules/home/startwerf.php</key>
 		<dict>
@@ -110,15 +122,14 @@
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>index.php</string>
 		<string>inc/db.inc.php</string>
 		<string>PEAR/MDB2.php</string>
-		<string>modules/home/startwerf.php</string>
-		<string>modules/home/inc/link.da.inc.php</string>
+		<string>PEAR/HTMLTemplate/IT.php</string>
+		<string>PEAR/HTTP/Upload.php</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{358, -90}, {1007, 878}}</string>
+	<string>{{377, 0}, {1007, 878}}</string>
 </dict>
 </plist>

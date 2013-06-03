@@ -20,8 +20,8 @@
 //
 
 //on server remove _stage for deploy
-$root = $_SERVER['DOCUMENT_ROOT'];
-require_once ''.$root.'/_stage/PEAR/PEAR.php';
+
+require_once'PEAR.php';
 
 define("IT_OK",                         1);
 define("IT_ERROR",                     -1);
