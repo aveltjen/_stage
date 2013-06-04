@@ -22,6 +22,7 @@ error_reporting($ebits ^ E_NOTICE);
 	//** Werf ophalen
 	$werf = $_REQUEST["werf"];
 	
+	
 	$werfdata = GetWerfByWerfID($werf);
 	$tpl->setVariable("description",$werfdata["Description"]);
 	$tpl->setVariable("id",$werfdata["id"]);

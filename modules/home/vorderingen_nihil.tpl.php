@@ -32,6 +32,13 @@ function newWindow(mypage,myname,w,h,features) {
 <table align="center">
 <tr>
 	<td>
+		<table class="tekstnormal" width="730">
+		<tr>
+		<td align="right">
+		<img src='images/document-pdf.png'>  <a href='vorderingen_nihil_pdf.php?werf={id}' target='_blank'>download PDF</a>	
+		</td>
+		</tr>
+		</table>
 		<fieldset>
 		<legend class="tekstlegend">Overzicht posten nihil</legend>
 		<table width="670" cellpadding="2" border="0" cellspacing="1">

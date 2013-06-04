@@ -28,11 +28,13 @@ function newWindow(mypage,myname,w,h,features) {
 </script>
 </head>
 <body>
+<center></center>
 <br>
 <form name="myform" action="vorderingen_historiek.php?werf={WerfID}" method="POST">
 <table class="tekstnormal" width="730">
 <tr>
 <td align="right">
+<img src='images/document-pdf.png'>  <a href='vorderingen_overschreiding_pdf.php?werf={WerfID}' target='_blank'>download PDF</a>	
 <button type="submit">historiek opvragen</button>
 </td>
 </tr>

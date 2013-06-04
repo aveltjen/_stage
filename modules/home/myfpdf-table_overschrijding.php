@@ -24,7 +24,7 @@ class myFpdf extends FPDF
         $oMulticell->SetStyle("head1","arial","",6,"160,160,160");
         $oMulticell->SetStyle("head2","arial","",6,"0,119,220");
         
-        $oMulticell->multiCell(200, 3, "POSTEN NIHIL - werfnummer ".$werfdata["nummer"]." - gegenereerd door supervisie, product van onafhankelijk werftoezicht");
+        $oMulticell->multiCell(200, 3, "POSTEN OVERSCHRIJDING - werfnummer ".$werfdata["nummer"]." - gegenereerd door supervisie, product van onafhankelijk werftoezicht");
                               
         $this->SetY($this->tMargin);
     }
