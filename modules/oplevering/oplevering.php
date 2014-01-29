@@ -60,25 +60,9 @@ $msID = $post["idmeetstaat"];
 
 $description = GetExtraInfoPost($msID,$werf);
 
-//print_r($description);
-//$row="<b>...</b><br>";
-// if(!empty($description))
-// {
-// 	foreach($description as $value)
-// 	{
-// 		if($value != ""){
-// 			$row = "".$value."<br>";
-// 			
-// 		}
-// 		
-// 	}
-// 	
-// }
-
-//$row = "".$description[0]."<br>".$description[1]."<br>".$description[2]."<br>".$description[3]."<br>".$description[3]."";
 
 $tpl->setVariable("nummer",$post["nummer"]);
-$tpl->setVariable("omschrijving","".wordwrap($row."</b><br>".$post["omschrijving"],85,"<br />\n")."");
+$tpl->setVariable("omschrijving","".wordwrap($post["omschrijving"],85,"<br />\n"));
 $tpl->setVariable("eenheden",$post["eenheden"]);
 $tpl->setVariable("VH",number_format($post["voorziene_hv"],'3',',',' '));
 $tpl->setVariable("eprijs",number_format($post["prijs"],'2',',',' '));

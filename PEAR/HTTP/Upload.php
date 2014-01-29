@@ -41,7 +41,10 @@
 
 //on server remove _stage for deploy
 
-require_once'PEAR.php';
+$root = $_SERVER['DOCUMENT_ROOT'];
+$webroot = $root."/_stage/PEAR/PEAR.php";
+
+require_once $webroot;
 /**
  * defines default chmod
  */

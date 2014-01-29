@@ -23,17 +23,18 @@
 		//MEETSTAAT GET EXTRA INFO OF POST
 			function GetExtraInfoPost($msID,$werf){
 				global $db;
-				
+				$description[] = "0";
+
 				$rij = array($msID-8,$msID-7,$msID-6,$msID-5,$msID-4,$msID-3,$msID-2,$msID-1);
 				
 				foreach ($rij as $waarde)
 				{			
 					$result = $db->query("SELECT * FROM v_meetstaat_werf_".$werf." WHERE ID = $waarde");
 					$row = $result->fetchrow(MDB2_FETCHMODE_ASSOC);
-					if($row[nummer] == "" AND $row[eenheden] == ""){
-						if($row[omschrijving] != "")
+					if($row["nummer"] == "" AND $row["eenheden"] == ""){
+						if($row["omschrijving"] != "")
 						{
-							$description[] = $row[omschrijving];
+							$description[] = $row["omschrijving"];
 						}	
 					}
 				}

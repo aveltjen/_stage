@@ -20,8 +20,10 @@
 //
 
 //on server remove _stage for deploy
+$root = $_SERVER['DOCUMENT_ROOT'];
+$webroot = $root."/_stage/PEAR/PEAR.php";
 
-require_once'PEAR.php';
+require_once $webroot;
 
 define("IT_OK",                         1);
 define("IT_ERROR",                     -1);

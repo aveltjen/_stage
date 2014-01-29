@@ -28,7 +28,7 @@
 	//*******Template specific code*************
 	
 	//** Uitloggen
-	if($_REQUEST["action"]=="logout"){
+	if(isset($_REQUEST["action"])=="logout"){
 		session_destroy();
 		header("Location: ../../index.php");
 	}
@@ -64,7 +64,7 @@
 			</tr>
 	");	
 	
-	if($_REQUEST["raadplegen"]=="yes"){
+	if(isset($_REQUEST["raadplegen"])=="yes"){
 		$tpl->setVariable("empty","");	
 		
 		$parameter = $_REQUEST["periode"];
@@ -84,6 +84,7 @@
 		
 		
 		//1#POSTEN DIE IN DE PERIODE GEVORDER ZIJN EERST OPZOEKEN
+		$tbedrag = 0;
 		$vhtotaal = 0;
 		$posten = GetPostByPeriode($periode,$werf);
 			

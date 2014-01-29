@@ -25,11 +25,11 @@
 	//*******Template specific code*************
 	
 	//** Uitloggen
-	if($_REQUEST["action"]=="logout"){
+	if(isset($_REQUEST["action"])=="logout"){
 		session_destroy();
 		header("Location: ../../index.php");
 	}
-	
+
 	//** Documenten ophalen ophalen
 	// print_r($user);
 	$id			= $user["id"];
